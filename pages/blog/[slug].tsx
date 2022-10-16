@@ -3,13 +3,14 @@ import Layout from "../../components/layout/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PostTypes } from "../../types/types";
 import moment from "moment";
-import PortableText, { blockContentToPlainText } from "react-portable-text";
+import { blockContentToPlainText } from "react-portable-text";
 import Image from "next/image";
 import ImageUrlBuilder from "@sanity/image-url";
 import Link from "next/link";
 import ShareModel from "../../components/models/ShareModel";
 import Head from "next/head";
 import client from "../../sanityClient";
+import { PortableText } from "@portabletext/react";
 
 interface SlugType {
   slug: { current: string; _type: string };
@@ -30,6 +31,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+const serializers = {
+  types: {
+    code: (props: any) => (
+      <pre data-language={props.value.language}>
+        <code>{props.value.code}</code>
+      </pre>
+    ),
+  },
+};
+
 export const getStaticProps: GetStaticProps = async (context) => {
   const post = await client.fetch(
     `*[_type == "post" && slug.current == "${context.params?.slug}"]{..., author->, categories[]->}`
@@ -37,6 +48,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: { post: post[0] },
   };
+};
+
+const convertToId = (Text: string) => {
+  return Text.toLowerCase()
+    .replace(/[^\w ]+/g, "")
+    .replace(/ +/g, "-");
 };
 
 const SlugIndex = ({ post }: PostType) => {
@@ -51,13 +68,14 @@ const SlugIndex = ({ post }: PostType) => {
     const wpm = 225;
     return Math.ceil(totalWords / wpm);
   };
-  const convertToId = (Text: string) => {
-    return Text.toLowerCase()
-      .replace(/[^\w ]+/g, "")
-      .replace(/ +/g, "-");
-  };
+
   useEffect(() => {
-    let data = document.querySelectorAll("article > div > h2");
+    var subHeadings = document.querySelectorAll("article > h2");
+    for (var i = 0; i < subHeadings.length; i++) {
+      var subHeading = subHeadings[i];
+      subHeading.setAttribute("id", convertToId(subHeading.innerHTML));
+    }
+    let data = document.querySelectorAll("article > h2");
     setPostContent(Array.from(data));
   }, []);
   return (
@@ -173,24 +191,8 @@ const SlugIndex = ({ post }: PostType) => {
             <div className=""></div>
           </div>
           <div className="flex-1 my-4">
-            <article className="max-w-4xl prose lg:prose-xl prose-a:transition-all prose-code:p-1 prose-code:bg-[#252525] prose-code:rounded-md prose-code:m-1">
-              <PortableText
-                content={post.content}
-                projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
-                dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
-                serializers={{
-                  h2: (props: any) => {
-                    return (
-                      <h2 id={convertToId(props.children.toString())}>
-                        {props.children}
-                      </h2>
-                    );
-                  },
-                  code: (props: any) => {
-                    return <code>{props.children}</code>;
-                  },
-                }}
-              />
+            <article className="max-w-4xl prose lg:prose-xl prose-a:transition-all">
+              <PortableText value={post.content} components={serializers} />
             </article>
             <div className="max-w-4xl">
               <div className="mt-12 px-4 py-4 bg-[#282828] rounded-lg flex gap-2">

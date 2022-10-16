@@ -60,6 +60,9 @@ module.exports = {
             "ol > li > ::marker": {
               color: theme("colors.primary-white"),
             },
+            pre: {
+              backgroundColor: "#252525",
+            },
           },
         },
       }),
