@@ -159,7 +159,7 @@ const SlugIndex = ({ post }: PostType) => {
               {postContent.length > 0 ? (
                 postContent.map(
                   (item: { id: string; innerText: string }, key: number) => (
-                    <Link href={`#${item.id}`}>
+                    <Link key={key} href={`#${item.id}`}>
                       <a className="transition-all hover:text-primary-white hover:tracking-wider">
                         {key + 1}. {item.innerText}
                       </a>

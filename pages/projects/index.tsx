@@ -74,9 +74,9 @@ const Page: NextPage<ProjectPageProps> = ({ projects }) => {
             My Projects<span className="text-primary">.</span>
           </h1>
           <p className="lg:w-1/2">
-            Let's check my open source projects. All projects github repo link
-            is available if possible you will able to find demo link also on
-            github repo README.md file.
+            Let&apos;s check my open source projects. All projects github repo
+            link is available if possible you will able to find demo link also
+            on github repo README.md file.
           </p>
         </section>
 

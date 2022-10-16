@@ -24,11 +24,11 @@ const HeroSection = () => {
         </h2>
         <div className="max-w-2xl">
           <p data-scroll className="text-primary-dark-white">
-            Pratham Sharma is a Web and App Developer, let's explore his
+            Pratham Sharma is a Web and App Developer, let&apos;s explore his
             projects and blogs. He always looking for fascinating project ideas.
             He specializes in mainly in website development (MERN & NextJS) and
-            application development (Flutter & React Native) so let's see his
-            portfolio website.
+            application development (Flutter & React Native) so let&apos;s see
+            his portfolio website.
           </p>
           <Link href={`/projects`}>
             <a className="text-xl font-dream-avenue text-primary hover:underline transition-all">

@@ -28,8 +28,8 @@ const Credentials: React.FC = () => {
               <h3 className="text-xl font-semibold my-2">Learning</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">
-                  The most important part of my or every developer's Journey is
-                  to learn every day.
+                  The most important part of my or every developer&apos;s
+                  Journey is to learn every day.
                 </p>
                 <p className="my-2">
                   I am a self-taught developer who learns different things from
@@ -37,7 +37,7 @@ const Credentials: React.FC = () => {
                 </p>
                 <p className="my-2">
                   The best source of learning for me is youtube, mdn docs, and
-                  technology's own docs.
+                  technology&apos;s own docs.
                 </p>
               </div>
             </div>
@@ -72,8 +72,8 @@ const Credentials: React.FC = () => {
                   I also learned many different things from my clients.
                 </p>
                 <p className="my-2">
-                  I didn't have many clients' work but for those I have, I
-                  completed them with my heart.
+                  I didn&apos;t have many clients&apos; work but for those I
+                  have, I completed them with my heart.
                 </p>
                 <p className="my-2">
                   I worked with different ideas most of them are mine, but some

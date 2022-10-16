@@ -65,7 +65,8 @@ const HumburgerMenu = ({ show }: Props) => {
             </h4>
             <p id="nav-content" className="max-w-sm">
               If the web can be evolved to include the missing APIs and have
-              better performance, [developers] won't need to go beyond the web.
+              better performance, [developers] won&apos;t need to go beyond the
+              web.
             </p>
           </div>
         </div>
