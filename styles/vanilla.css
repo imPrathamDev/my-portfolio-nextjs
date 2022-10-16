@@ -1,0 +1,84 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Removing blue effect on hover */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#container {
+  visibility: "hidden";
+}
+
+.lineChildren {
+  transform: translate(0, 500px);
+}
+
+#stick {
+  position: sticky;
+  top: 0;
+}
+
+.scroll__container {
+  width: 500%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.about-section p {
+  opacity: 0;
+  transform: translate(0);
+}
+
+.is-reveal p {
+  opacity: 1;
+}
+
+.reveal {
+  clip-path: inset(100% 0% 0% 0%);
+  animation: reveal-top 1s 0.5s forwards;
+}
+
+.reveal-delay {
+  visibility: visible;
+  clip-path: inset(100% 0% 0% 0%);
+  animation: reveal-top 1s 0s forwards;
+}
+
+.reveal-horizontal {
+  visibility: visible;
+  clip-path: inset(0% 0% 0% 100%);
+  animation: reveal-top 1s 1s forwards;
+}
+
+@keyframes reveal-top {
+  from {
+    clip-path: inset(100% 0% 0% 0%);
+  }
+  to {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
+
+@keyframes reveal-side {
+  from {
+    clip-path: inset(0% 0% 0% 100%);
+  }
+  to {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}

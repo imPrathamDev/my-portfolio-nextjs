@@ -1,26 +1,34 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer base {
+  @font-face {
+    font-family: "Dream Avenue";
+    src: url("/fonts/Dream-Avenue.ttf");
+    font-display: swap;
+    font-style: normal;
   }
-  body {
-    color: white;
-    background: black;
+
+  @font-face {
+    font-family: "Raleway";
+    src: url("/fonts/Raleway-Regular.ttf");
+    font-weigth: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Raleway Thin";
+    src: url("/fonts/Raleway-Thin.ttf");
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Raleway Light";
+    src: url("/fonts/Raleway-Light.ttf");
+    font-style: normal;
+    font-display: swap;
   }
 }
