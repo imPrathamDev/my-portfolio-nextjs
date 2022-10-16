@@ -17,7 +17,7 @@ const HumburgerMenu = ({ show }: Props) => {
     { title: "Home", path: "/" },
     { title: "Projects", path: "/projects" },
     { title: "Blog", path: "/blog" },
-    { title: "Resume", path: "/resume" },
+    { title: "Resume", path: "/resume.pdf" },
   ];
 
   useEffect(() => {

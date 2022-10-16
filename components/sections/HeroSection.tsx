@@ -30,7 +30,7 @@ const HeroSection = () => {
             application development (Flutter & React Native) so let&apos;s see
             his portfolio website.
           </p>
-          <Link href={`/projects`}>
+          <Link href={`/resume.pdf`}>
             <a className="text-xl font-dream-avenue text-primary hover:underline transition-all">
               Check Resume.
             </a>

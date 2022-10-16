@@ -64,7 +64,9 @@ const About: React.FC = () => {
           >
             <Image
               src={bgImage}
+              blurDataURL={`${process.env.NEXT_PUBLIC_HOST}/images/about.jpg`}
               layout="fill"
+              placeholder="blur"
               className="object-cover object-center opacity-80"
             />
           </div>

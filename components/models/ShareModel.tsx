@@ -23,6 +23,7 @@ interface ModelProps {
 
 const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
   const ref = useRef(null);
+  const url: string = `${process.env.NEXT_PUBLIC_HOST}/blog/${post.slug.current}`;
   const coptToClipBoard = (url: string) => {
     navigator.clipboard
       .writeText(url)
@@ -93,7 +94,7 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                   <div className="mt-6 flex justify-center">
                     <div className="grid grid-cols-2 lg:grid-cols-4 items-center gap-x-4">
                       <FacebookShareButton
-                        url={`https://impratham.dev/blog/${post.slug.current}`}
+                        url={url}
                         hashtag={post.keywords}
                         quote={post.title}
                       >
@@ -103,10 +104,7 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                         </div>
                       </FacebookShareButton>
 
-                      <TwitterShareButton
-                        url={`https://impratham.dev/blog/${post.slug.current}`}
-                        title={post.title}
-                      >
+                      <TwitterShareButton url={url} title={post.title}>
                         <div className="flex items-center gap-0.5 transition-all hover:bg-primary-black rounded-md px-2 py-1">
                           <RiTwitterLine className="h-5 w-5" />
                           <span>Twitter</span>
@@ -114,7 +112,7 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                       </TwitterShareButton>
 
                       <WhatsappShareButton
-                        url={`https://impratham.dev/blog/${post.slug.current}`}
+                        url={url}
                         title={`${post.title}\n${post.shortDesc}\nRead More:\n`}
                         separator={""}
                       >
@@ -125,7 +123,7 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                       </WhatsappShareButton>
 
                       <TelegramShareButton
-                        url={`https://impratham.dev/blog/${post.slug.current}`}
+                        url={url}
                         title={`${post.title}\n${post.shortDesc}\nRead More:\n`}
                       >
                         <div className="flex items-center gap-0.5 transition-all hover:bg-primary-black rounded-md px-2 py-1">
@@ -141,14 +139,10 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                     <div
                       id="copyURL"
                       ref={ref}
-                      onClick={() =>
-                        coptToClipBoard(
-                          `https://impratham.dev/blog/${post.slug.current}`
-                        )
-                      }
+                      onClick={() => coptToClipBoard(url)}
                       className="px-4 py-2 bg-primary-black rounded-md relative overflow-hidden cursor-pointer border border-transparent hover:border-green-500 hover:bg-green-400/40 transition-all duration-300"
                     >
-                      <span className="truncate text-ellipsis">{`https://impratham.dev/blog/${post.slug.current}`}</span>
+                      <span className="truncate text-ellipsis">{url}</span>
                     </div>
                   </div>
                 </Dialog.Panel>
