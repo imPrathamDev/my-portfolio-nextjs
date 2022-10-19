@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import bgImage from "../../public/images/about.jpg";
 import useOnScreen from "../../hooks/useOnScreen";

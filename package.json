@@ -11,10 +11,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.3",
     "@portabletext/react": "^1.0.6",
-    "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/image-url": "^1.0.1",
     "classnames": "^2.3.2",
-    "framer-motion": "^7.3.2",
     "gsap": "^3.11.1",
     "locomotive-scroll": "^4.1.4",
     "moment": "^2.29.4",
@@ -26,7 +24,6 @@
     "react-icons": "^4.4.0",
     "react-portable-text": "^0.5.1",
     "react-share": "^4.4.0",
-    "smooth-scrollbar": "^8.7.5",
     "splitting": "^1.0.6"
   },
   "devDependencies": {

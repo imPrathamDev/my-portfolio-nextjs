@@ -32,7 +32,7 @@ const HeroSection = () => {
           </p>
           <Link href={`/resume.pdf`}>
             <a className="text-xl font-dream-avenue text-primary hover:underline transition-all">
-              Check Resume.
+              <em>Check Resume</em>.
             </a>
           </Link>
         </div>

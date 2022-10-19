@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { ForwardedRef, MutableRefObject } from "react";
 
-function useOnScreen(ref, threshold = 0.3) {
-  // State and setter for storing whether element is visible
+function useOnScreen(
+  ref: MutableRefObject<HTMLElement | null>,
+  threshold = 0.3
+) {
   const [isIntersecting, setIntersecting] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Update our state when observer callback fires
         setIntersecting(entry?.isIntersecting ?? false);
       },
       {
@@ -15,7 +17,7 @@ function useOnScreen(ref, threshold = 0.3) {
         threshold,
       }
     );
-    const currentRef = ref.current;
+    const currentRef = ref?.current;
     if (currentRef) {
       observer.observe(currentRef);
     }
