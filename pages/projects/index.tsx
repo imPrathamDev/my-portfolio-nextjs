@@ -80,7 +80,7 @@ const Page: NextPage<ProjectPageProps> = ({ projects }) => {
           </p>
         </section>
 
-        <section className="lg:py-8 py-6 lg:px-6 px-2">
+        <section className="lg:py-8 py-6 lg:px-6">
           {projects.map((project, key) => (
             <React.Fragment key={key}>
               <ProjectListCard num={key} project={project} />
