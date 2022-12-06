@@ -10,7 +10,7 @@
         "updatedAt": "2022-12-06T10:33:53.606Z",
         "publishedAt": "2022-12-06T05:37:54.141Z",
         "slug": "keepers-of-ganesh-the-vanishing-art-of-mahout",
-        "image": "https://impratham.vercel.app/fake/image-five",
+        "image": "https://impratham.vercel.app/fake/image-five.jpg",
         "category": {
           "data": null
         }
@@ -26,7 +26,7 @@
         "updatedAt": "2022-12-06T10:35:47.731Z",
         "publishedAt": "2022-12-06T09:49:58.976Z",
         "slug": "migrant-sugarcane-workers-of-india",
-        "image": "https://impratham.vercel.app/fake/image-one",
+        "image": "https://impratham.vercel.app/fake/image-one.jpg",
         "category": {
           "data": {
             "id": 1,
@@ -51,7 +51,7 @@
         "updatedAt": "2022-12-06T10:37:22.129Z",
         "publishedAt": "2022-12-06T10:37:22.123Z",
         "slug": "on-the-shores-of-a-vanishing-island",
-        "image": "https://impratham.vercel.app/fake/image-three",
+        "image": "https://impratham.vercel.app/fake/image-three.jpg",
         "category": {
           "data": null
         }
@@ -67,7 +67,7 @@
         "updatedAt": "2022-12-06T10:38:34.791Z",
         "publishedAt": "2022-12-06T10:38:34.786Z",
         "slug": "the-atlas-of-beauty-india",
-        "image": "https://impratham.vercel.app/fake/image-four",
+        "image": "https://impratham.vercel.app/fake/image-four.jpg",
         "category": {
           "data": null
         }
