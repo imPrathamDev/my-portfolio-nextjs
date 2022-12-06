@@ -10,5 +10,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.status(200).json(data.data as any);
 }
