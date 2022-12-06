@@ -10,74 +10,7 @@
         "updatedAt": "2022-12-06T10:33:53.606Z",
         "publishedAt": "2022-12-06T05:37:54.141Z",
         "slug": "keepers-of-ganesh-the-vanishing-art-of-mahout",
-        "image": {
-          "data": {
-            "id": 1,
-            "attributes": {
-              "name": "sergio-capuzzimati-R1CGt8exzLg-unsplash.jpg",
-              "alternativeText": null,
-              "caption": null,
-              "width": 4495,
-              "height": 2280,
-              "formats": {
-                "large": {
-                  "ext": ".jpg",
-                  "url": "/uploads/large_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186.jpg",
-                  "hash": "large_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186",
-                  "mime": "image/jpeg",
-                  "name": "large_sergio-capuzzimati-R1CGt8exzLg-unsplash.jpg",
-                  "path": null,
-                  "size": 105.07,
-                  "width": 1000,
-                  "height": 507
-                },
-                "small": {
-                  "ext": ".jpg",
-                  "url": "/uploads/small_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186.jpg",
-                  "hash": "small_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186",
-                  "mime": "image/jpeg",
-                  "name": "small_sergio-capuzzimati-R1CGt8exzLg-unsplash.jpg",
-                  "path": null,
-                  "size": 27.82,
-                  "width": 500,
-                  "height": 254
-                },
-                "medium": {
-                  "ext": ".jpg",
-                  "url": "/uploads/medium_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186.jpg",
-                  "hash": "medium_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186",
-                  "mime": "image/jpeg",
-                  "name": "medium_sergio-capuzzimati-R1CGt8exzLg-unsplash.jpg",
-                  "path": null,
-                  "size": 59.41,
-                  "width": 750,
-                  "height": 381
-                },
-                "thumbnail": {
-                  "ext": ".jpg",
-                  "url": "/uploads/thumbnail_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186.jpg",
-                  "hash": "thumbnail_sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186",
-                  "mime": "image/jpeg",
-                  "name": "thumbnail_sergio-capuzzimati-R1CGt8exzLg-unsplash.jpg",
-                  "path": null,
-                  "size": 7.83,
-                  "width": 245,
-                  "height": 124
-                }
-              },
-              "hash": "sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "size": 2186.59,
-              "url": "/uploads/sergio_capuzzimati_R1_C_Gt8exz_Lg_unsplash_1819b0e186.jpg",
-              "previewUrl": null,
-              "provider": "local",
-              "provider_metadata": null,
-              "createdAt": "2022-12-06T05:32:09.137Z",
-              "updatedAt": "2022-12-06T07:25:44.371Z"
-            }
-          }
-        },
+        "image": "https://impratham.vercel.app/fake/image-five",
         "category": {
           "data": null
         }
@@ -93,74 +26,7 @@
         "updatedAt": "2022-12-06T10:35:47.731Z",
         "publishedAt": "2022-12-06T09:49:58.976Z",
         "slug": "migrant-sugarcane-workers-of-india",
-        "image": {
-          "data": {
-            "id": 2,
-            "attributes": {
-              "name": "aceofnet-I3Em9PGzkzw-unsplash.jpg",
-              "alternativeText": null,
-              "caption": null,
-              "width": 4926,
-              "height": 3276,
-              "formats": {
-                "large": {
-                  "ext": ".jpg",
-                  "url": "/uploads/large_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777.jpg",
-                  "hash": "large_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777",
-                  "mime": "image/jpeg",
-                  "name": "large_aceofnet-I3Em9PGzkzw-unsplash.jpg",
-                  "path": null,
-                  "size": 96.34,
-                  "width": 1000,
-                  "height": 665
-                },
-                "small": {
-                  "ext": ".jpg",
-                  "url": "/uploads/small_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777.jpg",
-                  "hash": "small_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777",
-                  "mime": "image/jpeg",
-                  "name": "small_aceofnet-I3Em9PGzkzw-unsplash.jpg",
-                  "path": null,
-                  "size": 27.98,
-                  "width": 500,
-                  "height": 333
-                },
-                "medium": {
-                  "ext": ".jpg",
-                  "url": "/uploads/medium_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777.jpg",
-                  "hash": "medium_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777",
-                  "mime": "image/jpeg",
-                  "name": "medium_aceofnet-I3Em9PGzkzw-unsplash.jpg",
-                  "path": null,
-                  "size": 57.88,
-                  "width": 750,
-                  "height": 499
-                },
-                "thumbnail": {
-                  "ext": ".jpg",
-                  "url": "/uploads/thumbnail_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777.jpg",
-                  "hash": "thumbnail_aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777",
-                  "mime": "image/jpeg",
-                  "name": "thumbnail_aceofnet-I3Em9PGzkzw-unsplash.jpg",
-                  "path": null,
-                  "size": 7.63,
-                  "width": 235,
-                  "height": 156
-                }
-              },
-              "hash": "aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "size": 1500.28,
-              "url": "/uploads/aceofnet_I3_Em9_P_Gzkzw_unsplash_97795bb777.jpg",
-              "previewUrl": null,
-              "provider": "local",
-              "provider_metadata": null,
-              "createdAt": "2022-12-06T10:35:37.274Z",
-              "updatedAt": "2022-12-06T10:35:37.274Z"
-            }
-          }
-        },
+        "image": "https://impratham.vercel.app/fake/image-one",
         "category": {
           "data": {
             "id": 1,
@@ -185,74 +51,7 @@
         "updatedAt": "2022-12-06T10:37:22.129Z",
         "publishedAt": "2022-12-06T10:37:22.123Z",
         "slug": "on-the-shores-of-a-vanishing-island",
-        "image": {
-          "data": {
-            "id": 3,
-            "attributes": {
-              "name": "raimond-klavins-0xQ1H6xMak4-unsplash.jpg",
-              "alternativeText": null,
-              "caption": null,
-              "width": 4592,
-              "height": 3064,
-              "formats": {
-                "large": {
-                  "ext": ".jpg",
-                  "url": "/uploads/large_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9.jpg",
-                  "hash": "large_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9",
-                  "mime": "image/jpeg",
-                  "name": "large_raimond-klavins-0xQ1H6xMak4-unsplash.jpg",
-                  "path": null,
-                  "size": 243.55,
-                  "width": 1000,
-                  "height": 667
-                },
-                "small": {
-                  "ext": ".jpg",
-                  "url": "/uploads/small_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9.jpg",
-                  "hash": "small_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9",
-                  "mime": "image/jpeg",
-                  "name": "small_raimond-klavins-0xQ1H6xMak4-unsplash.jpg",
-                  "path": null,
-                  "size": 69.31,
-                  "width": 500,
-                  "height": 334
-                },
-                "medium": {
-                  "ext": ".jpg",
-                  "url": "/uploads/medium_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9.jpg",
-                  "hash": "medium_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9",
-                  "mime": "image/jpeg",
-                  "name": "medium_raimond-klavins-0xQ1H6xMak4-unsplash.jpg",
-                  "path": null,
-                  "size": 145.17,
-                  "width": 750,
-                  "height": 500
-                },
-                "thumbnail": {
-                  "ext": ".jpg",
-                  "url": "/uploads/thumbnail_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9.jpg",
-                  "hash": "thumbnail_raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9",
-                  "mime": "image/jpeg",
-                  "name": "thumbnail_raimond-klavins-0xQ1H6xMak4-unsplash.jpg",
-                  "path": null,
-                  "size": 17.71,
-                  "width": 234,
-                  "height": 156
-                }
-              },
-              "hash": "raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "size": 3591.06,
-              "url": "/uploads/raimond_klavins_0x_Q1_H6x_Mak4_unsplash_b831c5ccd9.jpg",
-              "previewUrl": null,
-              "provider": "local",
-              "provider_metadata": null,
-              "createdAt": "2022-12-06T10:36:44.332Z",
-              "updatedAt": "2022-12-06T10:36:44.332Z"
-            }
-          }
-        },
+        "image": "https://impratham.vercel.app/fake/image-three",
         "category": {
           "data": null
         }
@@ -268,74 +67,7 @@
         "updatedAt": "2022-12-06T10:38:34.791Z",
         "publishedAt": "2022-12-06T10:38:34.786Z",
         "slug": "the-atlas-of-beauty-india",
-        "image": {
-          "data": {
-            "id": 4,
-            "attributes": {
-              "name": "renzo-d-souza-TrUI1hDUI2E-unsplash.jpg",
-              "alternativeText": null,
-              "caption": null,
-              "width": 5093,
-              "height": 3966,
-              "formats": {
-                "large": {
-                  "ext": ".jpg",
-                  "url": "/uploads/large_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38.jpg",
-                  "hash": "large_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38",
-                  "mime": "image/jpeg",
-                  "name": "large_renzo-d-souza-TrUI1hDUI2E-unsplash.jpg",
-                  "path": null,
-                  "size": 168.69,
-                  "width": 1000,
-                  "height": 778
-                },
-                "small": {
-                  "ext": ".jpg",
-                  "url": "/uploads/small_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38.jpg",
-                  "hash": "small_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38",
-                  "mime": "image/jpeg",
-                  "name": "small_renzo-d-souza-TrUI1hDUI2E-unsplash.jpg",
-                  "path": null,
-                  "size": 46.44,
-                  "width": 500,
-                  "height": 389
-                },
-                "medium": {
-                  "ext": ".jpg",
-                  "url": "/uploads/medium_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38.jpg",
-                  "hash": "medium_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38",
-                  "mime": "image/jpeg",
-                  "name": "medium_renzo-d-souza-TrUI1hDUI2E-unsplash.jpg",
-                  "path": null,
-                  "size": 100.54,
-                  "width": 750,
-                  "height": 584
-                },
-                "thumbnail": {
-                  "ext": ".jpg",
-                  "url": "/uploads/thumbnail_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38.jpg",
-                  "hash": "thumbnail_renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38",
-                  "mime": "image/jpeg",
-                  "name": "thumbnail_renzo-d-souza-TrUI1hDUI2E-unsplash.jpg",
-                  "path": null,
-                  "size": 9.53,
-                  "width": 200,
-                  "height": 156
-                }
-              },
-              "hash": "renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "size": 2481.05,
-              "url": "/uploads/renzo_d_souza_Tr_UI_1h_DUI_2_E_unsplash_b0eae40e38.jpg",
-              "previewUrl": null,
-              "provider": "local",
-              "provider_metadata": null,
-              "createdAt": "2022-12-06T10:38:10.865Z",
-              "updatedAt": "2022-12-06T10:38:10.865Z"
-            }
-          }
-        },
+        "image": "https://impratham.vercel.app/fake/image-four",
         "category": {
           "data": null
         }
