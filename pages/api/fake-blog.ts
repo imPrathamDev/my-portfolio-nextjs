@@ -11,12 +11,12 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("X-Dns-Prefetch-Control", "off");
-  res.setHeader(
-    "Strict-Transport-Security",
-    "max-age=15552000; includeSubDomains"
-  );
-  res.setHeader("X-Content-Type-Options", "nosniff");
+  // res.setHeader("X-Dns-Prefetch-Control", "off");
+  // res.setHeader(
+  //   "Strict-Transport-Security",
+  //   "max-age=15552000; includeSubDomains"
+  // );
+  // res.setHeader("X-Content-Type-Options", "nosniff");
   res.setHeader("Content-Encoding", "gzip");
   res.setHeader("Transfer-Encoding", "chunked");
   // res.setHeader("Access-Control-Allow-Origin", "*");
