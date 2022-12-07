@@ -17,8 +17,8 @@ export default function handler(
   //   "max-age=15552000; includeSubDomains"
   // );
   // res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("Content-Encoding", "gzip");
-  res.setHeader("Transfer-Encoding", "chunked");
+  // res.setHeader("Content-Encoding", "gzip");
+  // res.setHeader("Transfer-Encoding", "chunked");
   // res.setHeader("Access-Control-Allow-Origin", "*");
   // res.setHeader("Access-Control-Allow-Origin", "*");
   res.status(200).json(data.data as any);
