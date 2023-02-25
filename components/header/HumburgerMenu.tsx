@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import navBarImage from "../../public/images/navbar-bg.jpg";
 import useOnScreen from "../../hooks/useOnScreen";
 import cn from "classnames";
@@ -33,11 +33,17 @@ const HumburgerMenu = ({ show }: Props) => {
           {menu.map((item) => (
             <Link key={item?.title} href={item?.path}>
               <a>
-                <li
-                  id="nav-item"
-                  className="uppercase font-dream-avenue text-6xl lg:text-8xl tracking-wider my-6 lg:ml-16 transform translate-y-96 opacity-0 hover:text-primary hover:tracking-widest transition-all duration-300 cursor-pointer"
-                >
-                  {item?.title}
+                <li className="relative my-6">
+                  <span
+                    id="nav-item"
+                    className="relative uppercase font-dream-avenue text-6xl lg:text-8xl tracking-wider my-6 lg:ml-16 hover:text-primary hover:tracking-widest transition-all duration-300 top-28 lg:top-24 cursor-pointer"
+                  >
+                    {item?.title}
+                  </span>
+                  <div
+                    id="nav-item-div"
+                    className="after:absolute after:lg:w-[600px] after:w-[300px] after:lg:top-24 after:top-28 after:bg-primary-white after:lg:h-24 after:h-28 after:my-0 after:mx-auto after:transition-all after:left-0"
+                  ></div>
                 </li>
               </a>
             </Link>
@@ -59,11 +65,14 @@ const HumburgerMenu = ({ show }: Props) => {
               className="object-cover object-bottom transform transition-all duration-300 scale-125 hover:scale-105 cursor-pointer"
             />
           </div>
-          <div className="my-8 text-center lg:text-left lg:my-4 mx-6 lg:mr-4 flex flex-col lg:flex-row lg:items-start items-center gap-x-6">
-            <h4 id="nav-heading" className="text-2xl font-dream-avenue">
+          <div className="my-8 text-center lg:text-left lg:my-4 mx-6 lg:mr-4 flex flex-col lg:flex-row lg:items-start items-center gap-x-6 z-10">
+            <h4
+              id="nav-heading"
+              className="text-2xl font-dream-avenue opacity-0"
+            >
               Brendan Eich
             </h4>
-            <p id="nav-content" className="max-w-sm">
+            <p id="nav-content" className="max-w-sm opacity-0">
               If the web can be evolved to include the missing APIs and have
               better performance, [developers] won&apos;t need to go beyond the
               web.
