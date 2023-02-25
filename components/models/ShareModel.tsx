@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useState } from "react";
 import {
   RiFacebookLine,
   RiTwitterLine,
@@ -13,8 +13,8 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { PostTypes } from "../../types/types";
-import party from "party-js";
-
+import copyToClipBoard from "../../helper/copyHelper";
+import Toast from "../Toast";
 interface ModelProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,17 +24,7 @@ interface ModelProps {
 const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
   const ref = useRef(null);
   const url: string = `${process.env.NEXT_PUBLIC_HOST}/blog/${post.slug.current}`;
-  const coptToClipBoard = (url: string) => {
-    navigator.clipboard
-      .writeText(url)
-      .then(() => {
-        party.confetti(document.getElementById("copyURL")!, {
-          count: party.variation.range(20, 40),
-          size: party.variation.range(0.8, 1.2),
-        });
-      })
-      .catch(() => {});
-  };
+  const [toast, setToast] = useState({ show: false, msg: "" });
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -56,6 +46,7 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
+            <Toast toast={toast} setToast={setToast} />
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -139,7 +130,13 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                     <div
                       id="copyURL"
                       ref={ref}
-                      onClick={() => coptToClipBoard(url)}
+                      onClick={() => {
+                        copyToClipBoard(url, "copyURL");
+                        setToast({
+                          show: true,
+                          msg: "Code copy to clipboard!",
+                        });
+                      }}
                       className="px-4 py-2 bg-primary-black rounded-md relative overflow-hidden cursor-pointer border border-transparent hover:border-green-500 hover:bg-green-400/40 transition-all duration-300"
                     >
                       <span className="truncate text-ellipsis">{url}</span>
