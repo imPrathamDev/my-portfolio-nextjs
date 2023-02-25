@@ -3,12 +3,12 @@ import React from "react";
 const Credentials: React.FC = () => {
   return (
     <section className="mx-6 xl:mx-20 lg:mx-20 my-24 xl:h-screen lg:h-screen flex flex-col xl:flex-row lg:flex-row lg:items-center mix-blend-difference">
-      <div className="flex flex-col xl:flex-row lg:flex-row gap-4">
+      <div className="flex flex-col xl:flex-row lg:flex-row gap-4 w-full">
         <h2
           data-scroll
           data-scroll-speed="3"
           data-scroll-delay="1"
-          className="text-6xl font-dream-avenue my-3 flex-1"
+          className="text-7xl font-dream-avenue my-3 flex-1"
         >
           Developing <br />
           <span className="text-primary">Journey</span>.
