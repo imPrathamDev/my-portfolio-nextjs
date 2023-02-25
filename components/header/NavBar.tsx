@@ -1,12 +1,27 @@
-import gsap, { Expo } from "gsap";
+import gsap, { Expo, Power2 } from "gsap";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HumburgerMenu from "./HumburgerMenu";
 
 const NavBar: React.FC = () => {
   const [show, setShow] = useState(false);
-  const [once, setOnce] = useState(false);
   let tl = gsap.timeline();
+
+  const isMobile = (): Boolean => {
+    if (
+      navigator.userAgent.match(/Android/i) ||
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   useEffect(() => {
     if (show) {
       tl.to("#nav-container", {
@@ -14,31 +29,37 @@ const NavBar: React.FC = () => {
         left: 0,
         ease: Expo.easeInOut,
       });
-      tl.to("ul > a > li", {
-        duration: 0.5,
-        y: 0,
+      tl.to(
+        "#nav-item",
+        {
+          duration: 0.8,
+          top: 0,
+          ease: Power2.easeInOut,
+          stagger: {
+            amount: 0.6,
+          },
+        },
+        "-=0.4"
+      );
+      tl.to("#nav-heading", {
+        duration: 0.4,
         opacity: 1,
-        ease: Expo.easeInOut,
-        stagger: 0.5,
+        ease: "power2.easeInOut",
       });
-      if (!once) {
-        tl.from("#nav-heading", {
-          duration: 0.4,
-          opacity: 0,
-          ease: "power2.easeInOut",
-        });
-        tl.from("#nav-content", {
-          duration: 0.6,
-          opacity: 0,
-          ease: "power2.easeInOut",
-        });
-      }
-      setOnce(true);
+      tl.to("#nav-content", {
+        duration: 0.6,
+        opacity: 1,
+        ease: "power2.easeInOut",
+      });
     } else {
       tl.to("#nav-container", {
         duration: 0.8,
         left: "-100%",
         ease: Expo.easeInOut,
+      });
+      tl.to("#nav-item", {
+        duration: 0,
+        top: isMobile() ? 112 : 96,
       });
     }
   }, [show]);
