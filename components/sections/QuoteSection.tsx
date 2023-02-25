@@ -49,30 +49,21 @@ const QuoteSection: React.FC = () => {
             id="quote-text"
             className="font-dream-avenue text-center xl:text-left lg:text-left text-6xl xl:text-6xl text-primary-black"
           >
-            Javascript, TypeScript, ReactJS, NextJS, Redux, Redux Toolkit, React
-            Native, TailwindCSS, NodeJS, ExpressJS, GSAP, MongoDB, Firebase,
-            SQL, Etc.
+            Javascript, TypeScript, ReactJS, NextJS, Golang, SolidJS, Solid
+            Start, Redux, Redux Toolkit, React Native, TailwindCSS, NodeJS,
+            ExpressJS, GSAP, MongoDB, Firebase, SQL, Etc.
           </h2>
         </div>
-        <div className="hidden xl:visible lg:visible w-1/2 h-full xl:flex lg:flex flex-col gap-y-4">
-          <div
-            data-scroll
-            data-scroll-speed="1"
-            data-scroll-delay="0.5"
-            className="relative overflow-hidden w-72 h-40 border-2 border-primary-dark-white border-opacity-60 ml-8 mt-8"
-          >
+        <div className="hidden xl:visible lg:visible w-1/2 h-[70vh] xl:flex lg:flex flex-col gap-y-4 relative px-6">
+          <div className="bg-primary-white h-[500px] w-[500px] absolute top-[10%] left-[10%] rounded-full bg-gradient-to-t to-[#f0a500] vai-[#f2e04a] from-[#f9f9d6] animate-blob filter blur-3xl opacity-70"></div>
+          <div className="relative overflow-hidden w-72 h-40 border-2 border-primary-dark-white border-opacity-60 ml-8 mt-8">
             <Image
               src={cardImage}
               layout="fill"
               className="object-cover object-center"
             />
           </div>
-          <div
-            data-scroll
-            data-scroll-speed="6"
-            data-scroll-delay="0.8"
-            className="absolute xl:bottom-24 xl:right-20 lg:bottom-20 lg:right-16 md:bottom-20 md:right-16"
-          >
+          <div className="absolute lg:bottom-0 lg:right-0 md:bottom-0 md:right-6">
             <div className="relative overflow-hidden w-96 h-52 border-2 border-primary-dark-white border-opacity-60 ml-8 mt-8">
               <Image
                 src={secondCardImage}
