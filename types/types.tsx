@@ -59,3 +59,16 @@ export interface ProjectTypes {
   shortDesc: string;
   title: string;
 }
+
+export interface ToastTypes {
+  toast: {
+    show: boolean;
+    msg: string;
+  };
+  setToast: (
+    value: React.SetStateAction<{
+      show: boolean;
+      msg: string;
+    }>
+  ) => void;
+}
