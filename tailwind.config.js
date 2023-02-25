@@ -18,7 +18,29 @@ module.exports = {
         "primary-white": "#eeeee6",
         "primary-dark-white": "#aba9a8",
       },
-
+      animation: {
+        blob: "blob 7s reverse infinite",
+      },
+      keyframes: {
+        blob: {
+          "0%": {
+            rotate: "0deg",
+            transform: "translate(0px, 0px) scale(1)",
+          },
+          "33%": {
+            rotate: "90deg",
+            transform: "translate(30px, -50px) scale(1.05)",
+          },
+          "66%": {
+            rotate: "180deg",
+            transform: "translate(-20px, 20px) scale(0.95)",
+          },
+          "100%": {
+            rotate: "360deg",
+            transform: "translate(0px, 0px) scale(1)",
+          },
+        },
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
