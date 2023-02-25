@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from "next";
-import { useEffect } from "react";
 import Footer from "../components/footer/Footer";
 import NavBar from "../components/header/NavBar";
 import About from "../components/sections/About";
@@ -9,8 +8,6 @@ import Credentials from "../components/sections/Credentials";
 import HeroSection from "../components/sections/HeroSection";
 import ProjectsSection from "../components/sections/ProjectsSection";
 import QuoteSection from "../components/sections/QuoteSection";
-import gsap from "gsap";
-const { SplitText } = require("../utils/Split3.min.js");
 import { SmoothScrollProvider } from "../context/SmoothScroll.context.js";
 import { PostTypes, ProjectTypes } from "../types/types";
 import Head from "next/head";
@@ -37,26 +34,6 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: NextPage<HomeProps> = ({ posts, projects }) => {
-  useEffect(() => {
-    const split = new SplitText("#heading", {
-      type: "lines",
-      linesClass: "transform translate-y-[500px]",
-    });
-
-    const splitParent = new SplitText("#heading", {
-      type: "lines",
-      linesClass: "overflow-hidden",
-    });
-
-    gsap.to(split.lines, {
-      duration: 1,
-      y: 0,
-      opacity: 1,
-      stagger: 0.1,
-      ease: "power2",
-    });
-  }, []);
-
   return (
     <>
       <Head>
@@ -99,8 +76,8 @@ const Home: NextPage<HomeProps> = ({ posts, projects }) => {
           content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/Design-&-Development-Portfolio.png`}
         />
       </Head>
-      <div data-scroll-container id="container">
-        <SmoothScrollProvider options={{ smooth: true, class: "is-reveal" }}>
+      <SmoothScrollProvider options={{ smooth: true, class: "is-reveal" }}>
+        <div data-scroll-container id="container">
           <NavBar />
           <div data-scroll-section>
             <main className="">
@@ -114,8 +91,8 @@ const Home: NextPage<HomeProps> = ({ posts, projects }) => {
             </main>
             <Footer />
           </div>
-        </SmoothScrollProvider>
-      </div>
+        </div>
+      </SmoothScrollProvider>
     </>
   );
 };
