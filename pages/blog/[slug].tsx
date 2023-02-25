@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { SyntheticEvent, useEffect, useId, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PostTypes } from "../../types/types";
@@ -11,6 +11,9 @@ import ShareModel from "../../components/models/ShareModel";
 import Head from "next/head";
 import client from "../../sanityClient";
 import { PortableText } from "@portabletext/react";
+import copyToClipBoard from "../../helper/copyHelper";
+import Toast from "../../components/Toast";
+import TextToSpeech from "../../components/sections/TextToSpeech";
 
 interface SlugType {
   slug: { current: string; _type: string };
@@ -31,16 +34,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-const serializers = {
-  types: {
-    code: (props: any) => (
-      <pre data-language={props.value.language}>
-        <code>{props.value.code}</code>
-      </pre>
-    ),
-  },
-};
-
 export const getStaticProps: GetStaticProps = async (context) => {
   const post = await client.fetch(
     `*[_type == "post" && slug.current == "${context.params?.slug}"]{..., author->, categories[]->}`
@@ -59,6 +52,7 @@ const convertToId = (Text: string) => {
 const SlugIndex = ({ post }: PostType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [postContent, setPostContent] = useState<any>([]);
+  const [toast, setToast] = useState({ show: false, msg: "" });
   const builder = ImageUrlBuilder(client);
   const urlFor = (source: object) => {
     return builder.image(source);
@@ -78,9 +72,46 @@ const SlugIndex = ({ post }: PostType) => {
     let data = document.querySelectorAll("article > h2");
     setPostContent(Array.from(data));
   }, []);
+
+  const serializers = {
+    types: {
+      code: (props: any) => (
+        <pre
+          data-language={props.value.language}
+          onClick={(e: any) => {
+            let text = e.target?.innerText.split("\nCopy to clipboard");
+            copyToClipBoard(text[0], null);
+            setToast({ show: true, msg: "Code copy to clipboard!" });
+          }}
+          className="transition-all border-2 border-transparent hover:border-primary-white relative group custom-scrollbar"
+        >
+          <code>{props.value.code}</code>
+          <div className="absolute invisible group-hover:visible flex items-center gap-1 text-sm top-2 right-2">
+            <span>Copy to clipboard</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-5 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+              />
+            </svg>
+          </div>
+        </pre>
+      ),
+    },
+  };
+
   return (
     <Layout>
       <main className="px-4 py-6 lg:px-24 lg:pt-32 lg:pb-8">
+        <Toast toast={toast} setToast={setToast} />
         <Head>
           <title>{`${post.title} | Pratham Sharma`}</title>
           <meta name="title" content={`${post.title} | Pratham Sharma`} />
@@ -133,6 +164,7 @@ const SlugIndex = ({ post }: PostType) => {
                   </span>
                 ))}
               </div>
+              <TextToSpeech text={blockContentToPlainText(post?.content)} />
               <button
                 onClick={() => setIsOpen(true)}
                 className="px-2 py-1 flex items-center gap-x-1 border border-primary-dark-white text-primary-dark-white rounded-full hover:border-primary hover:text-primary transition-all"
@@ -170,7 +202,7 @@ const SlugIndex = ({ post }: PostType) => {
             </div>
           </div>
         </section>
-        <section className="flex flex-col lg:flex-row gap-x-4">
+        <section className="flex flex-col lg:flex-row gap-x-4 my-2">
           <div className="pt-6 text-primary-dark-white lg:h-screen lg:sticky lg:top-16 lg:overflow-hidden lg:w-1/4">
             <h3 className="font-dream-avenue text-2xl my-1">Page Contents:</h3>
             <div className="m-1 flex flex-col gap-y-0.5">
