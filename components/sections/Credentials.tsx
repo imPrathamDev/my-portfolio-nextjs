@@ -4,12 +4,7 @@ const Credentials: React.FC = () => {
   return (
     <section className="mx-6 xl:mx-20 lg:mx-20 my-24 xl:h-screen lg:h-screen flex flex-col xl:flex-row lg:flex-row lg:items-center mix-blend-difference">
       <div className="flex flex-col xl:flex-row lg:flex-row gap-4 w-full">
-        <h2
-          data-scroll
-          data-scroll-speed="3"
-          data-scroll-delay="1"
-          className="text-7xl font-dream-avenue my-3 flex-1"
-        >
+        <h2 className="text-7xl font-dream-avenue my-3 flex-1">
           Developing <br />
           <span className="text-primary">Journey</span>.
         </h2>
@@ -20,11 +15,7 @@ const Credentials: React.FC = () => {
             Journey
           </h2>
           <div className="flex flex-col xl:flex-row lg:flex-row xl:items-start lg:items-start lg:gap-x-6">
-            <div
-              data-scroll
-              data-scroll-speed="1"
-              className="pt-6 pb-3 border-t-2 border-primary-dark-white"
-            >
+            <div className="pt-6 pb-3 border-t-2 border-primary-dark-white">
               <h3 className="text-xl font-semibold my-2">Learning</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">
@@ -41,11 +32,7 @@ const Credentials: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div
-              data-scroll
-              data-scroll-speed="3"
-              className="pt-6 pb-3 border-t-2 border-primary-dark-white"
-            >
+            <div className="pt-6 pb-3 border-t-2 border-primary-dark-white">
               <h3 className="text-xl font-semibold my-2">Pedagogue</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">
@@ -61,11 +48,7 @@ const Credentials: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div
-              data-scroll
-              data-scroll-speed="6"
-              className="pt-6 pb-3 border-t-2 border-primary-dark-white"
-            >
+            <div className="pt-6 pb-3 border-t-2 border-primary-dark-white">
               <h3 className="text-xl font-semibold my-2">Client Work</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">

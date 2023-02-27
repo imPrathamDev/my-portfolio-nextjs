@@ -35,22 +35,10 @@ const ProjectListCard: React.FC<ProjectCardListProps> = ({ num, project }) => {
           </div>
         </div>
         <div className="lg:w-3/5 flex flex-col justify-start z-10 py-6 lg:py-10 mix-blend-difference">
-          <h3
-            data-scroll
-            data-scroll-speed={num + 1}
-            data-scroll-delay="1"
-            className="text-5xl font-dream-avenue max-w-lg lg:-ml-10"
-          >
+          <h3 className="text-5xl font-dream-avenue max-w-lg lg:-ml-10">
             {project.title}
           </h3>
-          <p
-            data-scroll
-            data-scroll-speed={num}
-            data-scroll-delay="1.3"
-            className="mx-4 max-w-xl font-sans-light"
-          >
-            {project.shortDesc}
-          </p>
+          <p className="mx-4 max-w-xl font-sans-light">{project.shortDesc}</p>
         </div>
       </div>
     </a>

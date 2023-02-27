@@ -42,11 +42,7 @@ const Articles: React.FC<ArticleProps> = ({ posts }) => {
           </h2>
           <Link href={`/blog/${posts[0].slug.current}`}>
             <a>
-              <div
-                data-scroll
-                data-scroll-speed="3"
-                className="mt-8 lg:mt-16 mb-8 mx-0 lg:mx-4 group cursor-pointer"
-              >
+              <div className="mt-8 lg:mt-16 mb-8 mx-0 lg:mx-4 group cursor-pointer">
                 <div className="relative overflow-hidden w-full h-52 lg:h-64 2xl:h-72">
                   <Image
                     src={urlFor(posts[0].mainImage).url()}
@@ -85,11 +81,7 @@ const Articles: React.FC<ArticleProps> = ({ posts }) => {
           <div className="flex flex-col justify-between">
             <Link href={`/blog/${posts[1].slug.current}`}>
               <a>
-                <div
-                  data-scroll
-                  data-scroll-speed="6"
-                  className="mt-2 mb-8 mx-0 lg:mx-4 max-w-xl group cursor-pointer"
-                >
+                <div className="mt-2 mb-8 mx-0 lg:mx-4 max-w-xl group cursor-pointer">
                   <div className="relative overflow-hidden w-full h-52 lg:h-80">
                     <Image
                       src={urlFor(posts[1].mainImage).url()}
