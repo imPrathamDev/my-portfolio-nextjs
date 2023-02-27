@@ -1,3 +1,17 @@
+/*
+styling for lenis 
+*/
+
+html {
+  scroll-behavior: initial;
+}
+
+html,
+body {
+  min-height: 100%;
+  height: auto;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -13,10 +27,6 @@ input[type="number"] {
 /* Removing blue effect on hover */
 * {
   -webkit-tap-highlight-color: transparent;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 #container {
