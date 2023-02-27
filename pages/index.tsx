@@ -8,7 +8,6 @@ import Credentials from "../components/sections/Credentials";
 import HeroSection from "../components/sections/HeroSection";
 import ProjectsSection from "../components/sections/ProjectsSection";
 import QuoteSection from "../components/sections/QuoteSection";
-import { SmoothScrollProvider } from "../context/SmoothScroll.context.js";
 import { PostTypes, ProjectTypes } from "../types/types";
 import Head from "next/head";
 import client from "../sanityClient";
@@ -76,23 +75,21 @@ const Home: NextPage<HomeProps> = ({ posts, projects }) => {
           content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/Design-&-Development-Portfolio.png`}
         />
       </Head>
-      <SmoothScrollProvider options={{ smooth: true, class: "is-reveal" }}>
-        <div data-scroll-container id="container">
-          <NavBar />
-          <div data-scroll-section>
-            <main className="">
-              <HeroSection />
-              <About />
-              <Credentials />
-              <ProjectsSection projects={projects} />
-              <QuoteSection />
-              <Articles posts={posts} />
-              <Contact />
-            </main>
-            <Footer />
-          </div>
+      <div data-scroll-container id="container">
+        <NavBar />
+        <div data-scroll-section>
+          <main className="">
+            <HeroSection />
+            <About />
+            <Credentials />
+            <ProjectsSection projects={projects} />
+            <QuoteSection />
+            <Articles posts={posts} />
+            <Contact />
+          </main>
+          <Footer />
         </div>
-      </SmoothScrollProvider>
+      </div>
     </>
   );
 };
