@@ -1,4 +1,10 @@
-import React, { SyntheticEvent, useEffect, useId, useState } from "react";
+import React, {
+  SyntheticEvent,
+  useContext,
+  useEffect,
+  useId,
+  useState,
+} from "react";
 import Layout from "../../components/layout/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PostTypes } from "../../types/types";
@@ -14,6 +20,7 @@ import { PortableText } from "@portabletext/react";
 import copyToClipBoard from "../../helper/copyHelper";
 import Toast from "../../components/Toast";
 import TextToSpeech from "../../components/sections/TextToSpeech";
+import { SmoothScrollContext } from "../../context/SmoothScroll.context";
 
 interface SlugType {
   slug: { current: string; _type: string };
@@ -50,6 +57,7 @@ const convertToId = (Text: string) => {
 };
 
 const SlugIndex = ({ post }: PostType) => {
+  const scrollContext = useContext(SmoothScrollContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [postContent, setPostContent] = useState<any>([]);
   const [toast, setToast] = useState({ show: false, msg: "" });
@@ -75,36 +83,59 @@ const SlugIndex = ({ post }: PostType) => {
 
   const serializers = {
     types: {
-      code: (props: any) => (
-        <pre
-          data-language={props.value.language}
-          onClick={(e: any) => {
-            let text = e.target?.innerText.split("\nCopy to clipboard");
-            copyToClipBoard(text[0], null);
-            setToast({ show: true, msg: "Code copy to clipboard!" });
-          }}
-          className="transition-all border-2 border-transparent hover:border-primary-white relative group custom-scrollbar"
-        >
-          <code>{props.value.code}</code>
-          <div className="absolute invisible group-hover:visible flex items-center gap-1 text-sm top-2 right-2">
-            <span>Copy to clipboard</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5"
+      code: (props: any) => {
+        return (
+          <>
+            {props.value.filename && props.value.filename.length > 0 && (
+              <span className="flex items-center gap-x-0.5 text-sm text-gray-500">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                  />
+                </svg>
+                {props.value.filename}
+              </span>
+            )}
+            <pre
+              data-language={props.value.language}
+              onClick={(e: any) => {
+                let text = e.target?.innerText.split("\nCopy to clipboard");
+                copyToClipBoard(text[0], null);
+                setToast({ show: true, msg: "Code copy to clipboard!" });
+              }}
+              className="transition-all border-2 border-transparent hover:border-primary-white relative group custom-scrollbar"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-              />
-            </svg>
-          </div>
-        </pre>
-      ),
+              <code>{props.value.code}</code>
+              <div className="absolute invisible group-hover:visible flex items-center gap-1 text-sm top-2 right-2">
+                <span>Copy to clipboard</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                  />
+                </svg>
+              </div>
+            </pre>
+          </>
+        );
+      },
     },
   };
 
@@ -209,11 +240,15 @@ const SlugIndex = ({ post }: PostType) => {
               {postContent.length > 0 ? (
                 postContent.map(
                   (item: { id: string; innerText: string }, key: number) => (
-                    <Link key={key} href={`#${item.id}`}>
-                      <a className="transition-all hover:text-primary-white hover:tracking-wider">
-                        {key + 1}. {item.innerText}
-                      </a>
-                    </Link>
+                    <a
+                      href={"#" + item.id}
+                      onClick={() => {
+                        scrollContext?.lenis.scrollTo("#" + item.id);
+                      }}
+                      className="cursor-pointer transition-all hover:text-primary-white hover:tracking-wider"
+                    >
+                      {key + 1}. {item.innerText}
+                    </a>
                   )
                 )
               ) : (
@@ -223,7 +258,7 @@ const SlugIndex = ({ post }: PostType) => {
             <div className=""></div>
           </div>
           <div className="flex-1 my-4">
-            <article className="max-w-4xl prose lg:prose-xl prose-a:transition-all">
+            <article className="max-w-4xl prose lg:prose-xl prose-a:transition-all lg:prose-pre:mt-3">
               <PortableText value={post.content} components={serializers} />
             </article>
             <div className="max-w-4xl">
