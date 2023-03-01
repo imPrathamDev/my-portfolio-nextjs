@@ -1,29 +1,40 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import Lenis from "@studio-freight/lenis";
-import useIsomorphicLayoutEffect from "use-isomorphic-layout-effect";
 
-export const SmoothScrollContext = createContext<{ lenis: any } | null>(null);
+export const SmoothScrollContext = createContext<{
+  lenis: Lenis | null;
+} | null>(null);
 
-export const SmoothScrollProvider = ({ children }: { children: any }) => {
-  const [lenis, setLenis] = useState<any>(null);
-  useIsomorphicLayoutEffect(() => {
-    setLenis(
-      new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-        direction: "vertical", // vertical, horizontal
-        gestureDirection: "vertical", // vertical, horizontal, both
-        smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
-        infinite: false,
-      })
-    );
+export const SmoothScrollProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [lenisData, setLenisData] = useState<Lenis | null>(null);
+  let lenis: Lenis;
+  useEffect(() => {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical", // vertical, horizontal
+      gestureDirection: "vertical",
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    setLenisData(lenis);
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={{ lenis }}>
+    <SmoothScrollContext.Provider value={{ lenis: lenisData }}>
       {children}
     </SmoothScrollContext.Provider>
   );
