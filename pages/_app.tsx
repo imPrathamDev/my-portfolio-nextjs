@@ -47,7 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <Component {...pageProps} />
+      <SmoothScrollProvider>
+        <Component {...pageProps} />
+      </SmoothScrollProvider>
       <Analytics />
     </>
   );
