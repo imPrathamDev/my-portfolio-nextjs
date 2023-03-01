@@ -29,7 +29,8 @@ const HeroSection = () => {
     tl.to("#blob-hero", {
       duration: 0.5,
       top: "-30%",
-      ease: "back.inOut(2)",
+      scale: "1",
+      ease: "slow(0.7, 0.7, false)",
     });
   }, []);
   return (
@@ -37,7 +38,7 @@ const HeroSection = () => {
       <div className="xl:absolute lg:absolute xl:top-6 lg:top-6 flex flex-col items-center justify-center gap-y-4">
         <div
           id="blob-hero"
-          className="absolute bg-primary-white h-[500px] w-[500px] -top-[100%] transform -translate-x-[50%] -translate-y-[50%] rounded-full bg-gradient-to-t to-[#f0a500] vai-[#f2e04a] from-[#f9f9d6] animate-blob filter blur-3xl opacity-70"
+          className="absolute bg-primary-white h-[500px] w-[500px] -top-[100%] transform -translate-x-[50%] -translate-y-[50%] rounded-full bg-gradient-to-t to-[#f0a500] vai-[#f2e04a] from-[#f9f9d6] animate-blob filter blur-3xl opacity-70 scale-50"
         ></div>
         <h2
           id="heading"
