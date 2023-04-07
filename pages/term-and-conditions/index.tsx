@@ -8,13 +8,13 @@ const TCPage = () => {
       <main className="px-4 py-8 lg:px-24 lg:pt-32 lg:pb-8 lg:flex lg:items-center lg:justify-center">
         <div className="lg:max-w-[80vw]">
           <h1 className="text-4xl lg:text-7xl lg:leading-[1.1] font-dream-avenue my-4">
-            Terms and Conditions for Pratham's Portfolio Website.
+            Terms and Conditions for Pratham&apos;s Portfolio Website.
           </h1>
           <article className="prose lg:prose-lg lg:prose-h2:font-semibold">
             <p>
-              By accessing and using Pratham's Portfolio, you agree to these
-              Terms and Conditions. If you do not agree to these terms, please
-              do not use our website.
+              By accessing and using Pratham&apos;s Portfolio, you agree to
+              these Terms and Conditions. If you do not agree to these terms,
+              please do not use our website.
             </p>
 
             <h2>Use of Content</h2>
@@ -64,8 +64,8 @@ const TCPage = () => {
             <h2>Indemnification</h2>
             <p>
               You agree to indemnify and hold us harmless from any claim or
-              demand, including reasonable attorneys' fees, made by any third
-              party due to or arising out of your use of our website or
+              demand, including reasonable attorneys&apos; fees, made by any
+              third party due to or arising out of your use of our website or
               violation of these Terms and Conditions.
             </p>
             <h2>Governing Law</h2>

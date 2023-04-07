@@ -8,11 +8,11 @@ const PPPage = () => {
       <main className="px-4 py-8 lg:px-24 lg:pt-32 lg:pb-8 lg:flex lg:items-center lg:justify-center">
         <div className="lg:max-w-[80vw]">
           <h1 className="text-4xl lg:text-7xl lg:leading-[1.1] font-dream-avenue my-4">
-            Privacy Policy for Pratham's Portfolio Website.
+            Privacy Policy for Pratham&apos;s Portfolio Website.
           </h1>
           <article className="prose lg:prose-lg lg:prose-h2:font-semibold">
             <p>
-              At Pratham's Portfolio, we take your privacy seriously. This
+              At Pratham&apos;s Portfolio, we take your privacy seriously. This
               Privacy Policy explains how we collect, use, and protect your
               personal information. By visiting or using our website, you
               consent to the collection and use of your information in
