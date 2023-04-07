@@ -83,7 +83,7 @@ const ShareModel = ({ isOpen, setIsOpen, post }: ModelProps) => {
                     </button>
                   </div>
                   <div className="mt-6 flex justify-center">
-                    <div className="grid grid-cols-2 lg:grid-cols-4 items-center gap-x-4">
+                    <div className="flex flex-wrap items-center justify-center gap-x-4">
                       <FacebookShareButton
                         url={url}
                         hashtag={post.keywords}
