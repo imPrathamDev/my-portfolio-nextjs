@@ -1,26 +1,27 @@
-import React, {
-  SyntheticEvent,
-  useContext,
-  useEffect,
-  useId,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../components/layout/Layout";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PostTypes } from "../../types/types";
 import moment from "moment";
 import { blockContentToPlainText } from "react-portable-text";
 import Image from "next/image";
-import ImageUrlBuilder from "@sanity/image-url";
-import Link from "next/link";
 import ShareModel from "../../components/models/ShareModel";
 import Head from "next/head";
 import client from "../../sanityClient";
-import { PortableText } from "@portabletext/react";
+import { PortableText, PortableTextReactComponents } from "@portabletext/react";
 import copyToClipBoard from "../../helper/copyHelper";
 import Toast from "../../components/Toast";
 import TextToSpeech from "../../components/sections/TextToSpeech";
 import { SmoothScrollContext } from "../../context/SmoothScroll.context";
+import SanityImage from "../../components/SanityImage";
+import urlFor from "../../helper/urlForHelper";
+import Author from "../../components/Blog/Author";
+import PrismJS from "prismjs";
+import parse from "html-react-parser";
+import readingTime from "../../helper/readingTimeHelper";
+import convertToId from "../../helper/convertToIdHelper";
+import Link from "next/link";
+import PageTitle from "../../components/PageTitle";
 
 interface SlugType {
   slug: { current: string; _type: string };
@@ -50,26 +51,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-const convertToId = (Text: string) => {
-  return Text.toLowerCase()
-    .replace(/[^\w ]+/g, "")
-    .replace(/ +/g, "-");
-};
-
 const SlugIndex = ({ post }: PostType) => {
   const scrollContext = useContext(SmoothScrollContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [postContent, setPostContent] = useState<any>([]);
   const [toast, setToast] = useState({ show: false, msg: "" });
-  const builder = ImageUrlBuilder(client);
-  const urlFor = (source: object) => {
-    return builder.image(source);
-  };
-  const readingTime = () => {
-    const totalWords = blockContentToPlainText(post?.content).split(" ").length;
-    const wpm = 225;
-    return Math.ceil(totalWords / wpm);
-  };
 
   useEffect(() => {
     var subHeadings = document.querySelectorAll("article > h2");
@@ -81,59 +67,68 @@ const SlugIndex = ({ post }: PostType) => {
     setPostContent(Array.from(data));
   }, []);
 
-  const serializers = {
+  const serializers: Partial<PortableTextReactComponents> = {
     types: {
-      code: (props: any) => {
+      code: (props) => {
+        const html = PrismJS.highlight(
+          props.value.code,
+          PrismJS.languages?.[props.value.language],
+          props.value.language
+        );
         return (
           <>
-            {props.value.filename && props.value.filename.length > 0 && (
-              <span className="flex items-center gap-x-0.5 text-sm text-gray-500">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1}
-                  stroke="currentColor"
-                  className="w-5 h-5"
+            <div className="transition-all border border-transparent hover:border-primary-white/30 rounded-lg bg-[#515151]">
+              <div className="w-full flex items-center justify-between bg-[#515151] rounded-t-md px-2 py-1">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 rounded-full bg-[#323232]"></div>
+                  <div className="w-2 h-2 rounded-full bg-[#323232]"></div>
+                  <div className="w-2 h-2 rounded-full bg-[#323232]"></div>
+                </div>
+                {props.value.filename && props.value.filename.length > 0 && (
+                  <span className="text-xs  text-gray-300">
+                    {props.value.filename}
+                  </span>
+                )}
+                <button
+                  onClick={(e: any) => {
+                    copyToClipBoard(props.value.code, null);
+                    setToast({ show: true, msg: "Code copy to clipboard!" });
+                  }}
+                  className="transition-all hover:text-green-500"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                  />
-                </svg>
-                {props.value.filename}
-              </span>
-            )}
-            <pre
-              data-language={props.value.language}
-              onClick={(e: any) => {
-                let text = e.target?.innerText.split("\nCopy to clipboard");
-                copyToClipBoard(text[0], null);
-                setToast({ show: true, msg: "Code copy to clipboard!" });
-              }}
-              className="transition-all border-2 border-transparent hover:border-primary-white relative group custom-scrollbar"
-            >
-              <code>{props.value.code}</code>
-              <div className="absolute invisible group-hover:visible flex items-center gap-1 text-sm top-2 right-2">
-                <span>Copy to clipboard</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
-                  />
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-4 h-4 transition-all transform hover:scale-125 hover:animate-shake"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
+                    />
+                  </svg>
+                </button>
               </div>
-            </pre>
+              <pre
+                data-language={props.value.language}
+                className="relative group lg:custom-scrollbar"
+              >
+                <code className="">{parse(html)}</code>
+              </pre>
+            </div>
           </>
+        );
+      },
+      image: (props) => {
+        return (
+          <SanityImage
+            asset={props.value.asset}
+            alt={props.value.alt}
+            className="rounded-md bg-gray-500"
+          />
         );
       },
     },
@@ -141,42 +136,23 @@ const SlugIndex = ({ post }: PostType) => {
 
   return (
     <Layout>
-      <main className="px-4 py-6 lg:px-24 lg:pt-32 lg:pb-8">
+      <main className="px-4 py-6 lg:px-24 lg:pt-32 lg:pb-8 relative overflow-hidden lg:overflow-visible">
         <Toast toast={toast} setToast={setToast} />
-        <Head>
-          <title>{`${post.title} | Pratham Sharma`}</title>
-          <meta name="title" content={`${post.title} | Pratham Sharma`} />
-          <meta name="description" content={post.shortDesc} />
-          <meta name="keywords" content={post.keywords} />
-          <meta name="author" content={post.author.name} />
-
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOST} />
-          <meta
-            property="twitter:title"
-            content={`${post.title} | Pratham Sharma`}
-          />
-          <meta property="twitter:description" content={post.shortDesc} />
-          <meta
-            property="twitter:image"
-            content={urlFor(post.mainImage).url()}
-          />
-
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={process.env.NEXT_PUBLIC_HOST} />
-          <meta
-            property="og:title"
-            content={`${post.title} | Pratham Sharma`}
-          />
-          <meta property="og:description" content={post.shortDesc} />
-          <meta property="og:image" content={urlFor(post.mainImage).url()} />
-        </Head>
+        <PageTitle
+          title={`${post.title} | Pratham Sharma`}
+          description={post.shortDesc}
+          keywords={post.keywords}
+          author={post.author.name}
+          image={urlFor(post.mainImage).url()}
+        />
         <section className="flex flex-col items-center">
           <div className="max-w-4xl">
             <div className="my-1 flex items-center gap-x-2">
               <span>{moment(post.publishedAt).format("MMMM Do YYYY")}</span>
               <span>-</span>
-              <span>{readingTime()} min</span>
+              <span>
+                {readingTime(blockContentToPlainText(post?.content))} min
+              </span>
             </div>
             <h1 className="text-4xl lg:text-6xl font-dream-avenue py-2">
               {post.title}
@@ -184,21 +160,21 @@ const SlugIndex = ({ post }: PostType) => {
             <p className="max-w-3xl font-sans-light lg:text-lg">
               {post.shortDesc}
             </p>
-            <div className="my-2 flex items-center gap-x-2">
-              <div className="flex items-center gap-x-2">
-                {post.categories.map((category) => (
+            <div className="w-[90vw] lg:w-[70vw] my-2 flex items-center gap-x-2 relative overflow-auto">
+              {post.categories.map((category) => (
+                <Link href={`/blog?category=${category.title.toLowerCase()}`}>
                   <span
                     key={category._id}
-                    className="px-2 py-1 bg-transparent rounded-full border border-primary-dark-white text-primary-dark-white uppercase cursor-pointer hover:border-primary hover:text-primary transition-all"
+                    className="px-2 py-1 bg-transparent rounded-full border border-primary-dark-white text-primary-dark-white uppercase cursor-pointer hover:border-primary hover:text-primary transition-all linkHover"
                   >
                     {category.title}
                   </span>
-                ))}
-              </div>
+                </Link>
+              ))}
               <TextToSpeech text={blockContentToPlainText(post?.content)} />
               <button
                 onClick={() => setIsOpen(true)}
-                className="px-2 py-1 flex items-center gap-x-1 border border-primary-dark-white text-primary-dark-white rounded-full hover:border-primary hover:text-primary transition-all"
+                className="px-2 py-1 flex items-center gap-x-1 border border-primary-dark-white text-primary-dark-white rounded-full hover:border-primary hover:text-primary transition-all linkHover"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -241,9 +217,12 @@ const SlugIndex = ({ post }: PostType) => {
                 postContent.map(
                   (item: { id: string; innerText: string }, key: number) => (
                     <a
+                      key={key}
                       href={"#" + item.id}
                       onClick={() => {
-                        scrollContext?.lenis.scrollTo("#" + item.id);
+                        scrollContext !== null &&
+                          scrollContext.lenis !== null &&
+                          scrollContext.lenis.scrollTo("#" + item.id);
                       }}
                       className="cursor-pointer transition-all hover:text-primary-white hover:tracking-wider"
                     >
@@ -258,31 +237,10 @@ const SlugIndex = ({ post }: PostType) => {
             <div className=""></div>
           </div>
           <div className="flex-1 my-4">
-            <article className="max-w-4xl prose lg:prose-xl prose-a:transition-all lg:prose-pre:mt-3">
+            <article className="max-w-4xl prose prose-base prose-pre:mx-1 prose-pre:mb-1 prose-pre:mt-0.5 lg:prose-lg prose-a:transition-all prose-p:leading-7 relative overflow-hidden lg:prose-pre:mx-1 lg:prose-pre:mb-1 lg:prose-pre:mt-0.5 lg:prose-pre:rounded-t-lg lg:prose-pre:rounded-b-[cal(0.5rem - 0.25rem)]">
               <PortableText value={post.content} components={serializers} />
             </article>
-            <div className="max-w-4xl">
-              <div className="mt-12 px-4 py-4 bg-[#282828] rounded-lg flex gap-2">
-                <div className="">
-                  <Image
-                    src={urlFor(post.author.image).url()}
-                    width={"60px"}
-                    height={"60px"}
-                    className="rounded-full"
-                    alt={post.author.name}
-                  />
-                </div>
-                <div className="">
-                  <h3 className="text-2xl font-dream-avenue">
-                    {post.author.name}
-                    <span className="text-primary text-4xl">.</span>
-                  </h3>
-                  <div className="max-w-2xl">
-                    <p>{blockContentToPlainText(post.author.bio)}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Author author={post.author} />
           </div>
         </section>
         <ShareModel isOpen={isOpen} setIsOpen={setIsOpen} post={post} />
