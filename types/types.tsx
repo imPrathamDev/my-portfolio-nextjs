@@ -58,6 +58,10 @@ export interface ProjectTypes {
   };
   shortDesc: string;
   title: string;
+  slug: { current: string; _type: string };
+  readmeURL: null | string;
+  liveURL: null | string;
+  npmURL: null | string;
 }
 
 export interface ToastTypes {
@@ -71,4 +75,25 @@ export interface ToastTypes {
       msg: string;
     }>
   ) => void;
+}
+
+export interface PostAuthorType {
+  name: string;
+  image: { asset: { _ref: string; _type: string }; _type: string };
+  bio: any;
+  slug: { current: string; _type: string };
+  _createdAt: Date;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: Date;
+}
+
+export interface CategoryType {
+  title: string;
+  _createdAt: Date;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: Date;
 }
