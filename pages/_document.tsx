@@ -29,9 +29,6 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body className="font-sans bg-primary-black text-primary-white selection:bg-primary-white selection:text-primary-black text-base">
-          <span className="font-sans-light fixed bottom-6 right-4 text-sm text-primary-dark-white mix-blend-difference z-10">
-            © 2022 - infinity
-          </span>
           <Main />
           <NextScript />
         </body>
