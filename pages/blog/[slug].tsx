@@ -161,8 +161,11 @@ const SlugIndex = ({ post }: PostType) => {
               {post.shortDesc}
             </p>
             <div className="w-[90vw] lg:w-[70vw] my-2 flex items-center gap-x-2 relative overflow-auto">
-              {post.categories.map((category) => (
-                <Link href={`/blog?category=${category.title.toLowerCase()}`}>
+              {post.categories.map((category, index) => (
+                <Link
+                  key={index}
+                  href={`/blog?category=${category.title.toLowerCase()}`}
+                >
                   <span
                     key={category._id}
                     className="px-2 py-1 bg-transparent rounded-full border border-primary-dark-white text-primary-dark-white uppercase cursor-pointer hover:border-primary hover:text-primary transition-all linkHover"

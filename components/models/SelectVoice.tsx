@@ -93,8 +93,9 @@ const SelectVoice: React.FC<SelectVoiceModelProps> = ({
                 <div className="my-4 block max-h-[40vh] custom-scrollbar">
                   {voices && (
                     <>
-                      {voices.map((voice) => (
+                      {voices.map((voice, index) => (
                         <button
+                          key={index}
                           onClick={() => {
                             setVoice(voice);
                             speech.voice = voice;
