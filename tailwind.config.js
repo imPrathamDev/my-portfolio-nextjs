@@ -20,6 +20,11 @@ module.exports = {
       },
       animation: {
         blob: "blob 7s reverse infinite",
+        marquee: "marquee 5s linear alternate infinite",
+        shake: "shake 2s linear alternate infinite",
+        "rotate-anim": "rotate-anim 10s linear alternate infinite",
+        "marquee-hero": "marquee-hero 25s linear infinite",
+        "marquee-hero-2": "marquee-hero-2 25s linear infinite",
       },
       keyframes: {
         blob: {
@@ -29,16 +34,50 @@ module.exports = {
           },
           "33%": {
             rotate: "90deg",
-            transform: "translate(30px, -50px) scale(1.05)",
+            transform: "translate(30px, -50px) scale(1.15, 1)",
           },
           "66%": {
             rotate: "180deg",
-            transform: "translate(-20px, 20px) scale(0.95)",
+            transform: "translate(-20px, 20px) scale(0.95, 1)",
           },
           "100%": {
             rotate: "360deg",
             transform: "translate(0px, 0px) scale(1)",
           },
+        },
+        marquee: {
+          "0%": { left: 0 },
+          "100%": { left: "-100%" },
+        },
+        shake: {
+          "0%": {
+            rotate: "0deg",
+          },
+          "33%": {
+            rotate: "20deg",
+          },
+          "66%": {
+            rotate: "-20deg",
+          },
+          "100%": {
+            rotate: "0deg",
+          },
+        },
+        "rotate-anim": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
+        "marquee-hero": {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        "marquee-hero-2": {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
         },
       },
       typography: (theme) => ({
