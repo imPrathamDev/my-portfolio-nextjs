@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import cardImage from "../../public/images/qimage1.jpg";
-import secondCardImage from "../../public/images/qimage2.jpg";
+import cardImage from "../../public/images/stack-1.jpg";
+import secondCardImage from "../../public/images/stack-2.jpg";
 import useOnScreen from "../../hooks/useOnScreen";
-import gsap from "gsap";
+import gsap, { Power2 } from "gsap";
 const { SplitText } = require("../../utils/Split3.min.js");
 
 const QuoteSection: React.FC = () => {
   const ref = useRef(null);
+  const firstImageRef = useRef(null);
+  const secondImageRef = useRef(null);
   const onScreen = useOnScreen(ref);
   const [runOnce, setRunOnce] = useState(false);
   useEffect(() => {
@@ -26,11 +28,19 @@ const QuoteSection: React.FC = () => {
         });
 
         gsap.to(split.lines, {
-          duration: 1,
+          duration: 0.8,
           y: 0,
           opacity: 1,
           stagger: 0.1,
-          ease: "power2",
+          ease: Power2.easeOut,
+        });
+
+        gsap.to([firstImageRef.current, secondImageRef.current], {
+          duration: 0.8,
+          y: 0,
+          opacity: 1,
+          stagger: 0.1,
+          ease: Power2.easeOut,
         });
       }
     }
@@ -56,19 +66,29 @@ const QuoteSection: React.FC = () => {
         </div>
         <div className="hidden xl:visible lg:visible w-1/2 h-[70vh] xl:flex lg:flex flex-col gap-y-4 relative px-6">
           <div className="bg-primary-white h-[500px] w-[500px] absolute top-[10%] left-[10%] rounded-full bg-gradient-to-t to-[#f0a500] vai-[#f2e04a] from-[#f9f9d6] animate-blob filter blur-3xl opacity-70"></div>
-          <div className="relative overflow-hidden w-72 h-40 border-2 border-primary-dark-white border-opacity-60 ml-8 mt-8">
-            <Image
-              src={cardImage}
-              layout="fill"
-              className="object-cover object-center"
-            />
+          <div className="ml-8 mt-8">
+            <div
+              ref={firstImageRef}
+              className="relative overflow-hidden w-80 h-48 ukiyo"
+            >
+              <Image
+                src={cardImage}
+                layout="fill"
+                alt="Pratham"
+                className="object-cover object-center imageHover"
+              />
+            </div>
           </div>
-          <div className="absolute lg:bottom-0 lg:right-0 md:bottom-0 md:right-6">
-            <div className="relative overflow-hidden w-96 h-52 border-2 border-primary-dark-white border-opacity-60 ml-8 mt-8">
+          <div className="absolute lg:bottom-0 lg:right-0 md:bottom-0 md:right-6 ml-8 mt-8">
+            <div
+              ref={secondImageRef}
+              className="relative overflow-hidden w-96 h-56 ukiyo"
+            >
               <Image
                 src={secondCardImage}
+                alt="Sharma"
                 layout="fill"
-                className="object-cover object-center"
+                className="object-cover object-center imageHover"
               />
             </div>
           </div>
