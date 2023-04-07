@@ -1,7 +1,6 @@
-import React from "react";
+import { useEffect } from "react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
-import ImageUrlBuilder from "@sanity/image-url";
 import {
   RiInstagramLine,
   RiTwitterLine,
@@ -9,8 +8,11 @@ import {
   RiDribbbleLine,
   RiGithubLine,
 } from "react-icons/ri";
-import Head from "next/head";
 import client from "../../sanityClient";
+import PageTitle from "../../components/PageTitle";
+import urlFor from "../../helper/urlForHelper";
+import Link from "next/link";
+import isMobile from "../../helper/isMobileHelper";
 
 interface ProfileProps {
   profile: {
@@ -30,83 +32,86 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+const allLinks = [
+  {
+    title: "Website",
+    href: "/",
+  },
+  {
+    title: "Projects",
+    href: "/projects",
+  },
+  {
+    title: "Blogs",
+    href: "/blog",
+  },
+  {
+    title: "Email",
+    href: "mailto:pratham.sharma2105@gmail.com",
+  },
+];
+
 const Links = ({ profile }: ProfileProps) => {
-  const builder = ImageUrlBuilder(client);
-  const urlFor = (source: object) => {
-    return builder.image(source);
-  };
+  useEffect(() => {
+    const buttons = document.querySelectorAll("li");
+    buttons.forEach((el: HTMLLIElement) => {
+      el.addEventListener(isMobile() ? "touchstart" : "mouseover", () => {
+        el.style.backgroundColor = "transparent";
+      });
+
+      el.addEventListener(isMobile() ? "touchend" : "mouseleave", () => {
+        el.style.backgroundColor = "#262626";
+      });
+    });
+
+    return () => {
+      buttons.forEach((el: HTMLLIElement) => {
+        el.removeEventListener(isMobile() ? "touchstart" : "mouseover", () => {
+          el.style.backgroundColor = "transparent";
+        });
+
+        el.removeEventListener(isMobile() ? "touchend" : "mouseleave", () => {
+          el.style.backgroundColor = "#262626";
+        });
+      });
+    };
+  }, []);
   return (
     <main className="py-14 flex flex-col items-center">
-      <Head>
-        <title>My Links | Pratham Sharma</title>
-        <meta name="title" content="My Links | Pratham Sharma" />
-        <meta
-          name="description"
-          content="Let's check out Pratham Sharma's all social and personal links on one single page."
-        />
-        <meta
-          name="keywords"
-          content="Pratham Sharma, Portfolio, Pratham, imPrathamDev"
-        />
-        <meta name="author" content="Pratham Sharma" />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOST} />
-        <meta property="twitter:title" content="My Links | Pratham Sharma" />
-        <meta
-          property="twitter:description"
-          content="Let's check out Pratham Sharma's all social and personal links on one single page."
-        />
-        <meta
-          property="twitter:image"
-          content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/All-Social-&-Personal-Links.png`}
-        />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_HOST} />
-        <meta property="og:title" content="My Links | Pratham Sharma" />
-        <meta
-          property="og:description"
-          content="Let's check out Pratham Sharma's all social and personal links on one single page."
-        />
-        <meta
-          property="og:image"
-          content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/All-Social-&-Personal-Links.png`}
-        />
-      </Head>
+      <PageTitle
+        title="My Links | Pratham Sharma"
+        description="Let's check out Pratham Sharma's all social and personal links on one single page."
+        image="/ogImages/All-Social-&-Personal-Links.png"
+      />
       <section className="flex flex-col items-center text-center">
-        <Image
-          src={urlFor(profile.image).url()}
-          width={`80px`}
-          height={`80px`}
-          className="rounded-full"
-        />
+        <div className="relative">
+          <div
+            id="blob-hero"
+            className="absolute h-[160px] w-[160px] -top-6 -left-12 -right-12 rounded-full bg-gradient-to-t to-[#f0a500] from-[#f9f9d6] animate-blob opacity-70 scale-50 filter blur-3xl"
+          />
+          <Image
+            src={urlFor(profile.image).url()}
+            blurDataURL={urlFor(profile.image).url()}
+            width={`80px`}
+            height={`80px`}
+            className="rounded-full"
+          />
+        </div>
         <h1 className="font-dream-avenue text-2xl my-1">Pratham Sharma</h1>
         <p>Berojgar Web & App Developer</p>
       </section>
       <section className="mt-8 text-lg text-center">
         <h2 className="font-dream-avenue text-2xl my-2">Personal Links</h2>
         <ul>
-          <a href={process.env.NEXT_PUBLIC_HOST}>
-            <li className="my-2 px-12 py-1 rounded-md bg-[#262626] border border-[#262626] hover:bg-transparent transition-all duration-300">
-              Website
-            </li>
-          </a>
-          <a href={`${process.env.NEXT_PUBLIC_HOST}/projects`}>
-            <li className="my-2 px-12 py-1 rounded-md bg-[#262626] border border-[#262626] hover:bg-transparent transition-all duration-300">
-              Projects
-            </li>
-          </a>
-          <a href={`${process.env.NEXT_PUBLIC_HOST}/blog`}>
-            <li className="my-2 px-12 py-1 rounded-md bg-[#262626] border border-[#262626] hover:bg-transparent transition-all duration-300">
-              Blog
-            </li>
-          </a>
-          <a href={`mailto:pratham.sharma2105@gmail.com`}>
-            <li className="my-2 px-12 py-1 rounded-md bg-[#262626] border border-[#262626] hover:bg-transparent transition-all duration-300">
-              Email
-            </li>
-          </a>
+          {allLinks.map((link) => (
+            <Link key={link.title} href={link.href}>
+              <a>
+                <li className="my-2 px-12 py-1 rounded-md bg-[#262626] border border-[#262626]/80 transition-all duration-300">
+                  {link.title}
+                </li>
+              </a>
+            </Link>
+          ))}
         </ul>
       </section>
       <section className="mt-8 text-center text-base">
