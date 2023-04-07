@@ -1,24 +1,109 @@
 import "../styles/globals.css";
 import "../styles/vanilla.css";
+import "../styles/prism-atom.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 import { SmoothScrollProvider } from "../context/SmoothScroll.context";
+import Cursor from "../components/Cursor";
+import gsap from "gsap";
 import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  function isTouchDevice() {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  }
+
+  const createElm = function (menuItem: any) {
+    let menuItemsTexts = menuItem.children[0].children[0];
+
+    const menuItemsTextsArray = [...menuItemsTexts.textContent];
+
+    menuItemsTexts.textContent = "";
+
+    const textsArray: any = [];
+
+    menuItemsTextsArray.forEach((menuItemText) => {
+      textsArray.push(`<span>${menuItemText}</span>`);
+    });
+
+    textsArray.forEach((textArray: any) => {
+      menuItemsTexts.innerHTML += textArray;
+    });
+
+    const parentElm = menuItemsTexts.parentElement;
+
+    const parentElmHeight = parentElm.clientHeight;
+    parentElm.style.height = `${parentElmHeight}px`;
+
+    const cloneItem = menuItemsTexts.cloneNode(true);
+    parentElm.appendChild(cloneItem);
+  };
+
+  const animation = function (menuItem: any) {
+    gsap.defaults({
+      ease: "power1",
+      stagger: {
+        amount: 0.14,
+        from: "start",
+      },
+    });
+    if (isTouchDevice()) {
+      menuItem.addEventListener("touchstart", function () {
+        gsap.to(menuItem.children[0].children[0].children, {
+          y: "-100%",
+          color: menuItem.children[0].children[0].dataset.hoverColor,
+        });
+        gsap.to(menuItem.children[0].children[1].children, {
+          y: "-100%",
+          color: menuItem.children[0].children[0].dataset.hoverColor,
+        });
+      });
+    } else {
+      menuItem.addEventListener("mouseover", function () {
+        gsap.to(menuItem.children[0].children[0].children, {
+          y: "-100%",
+          color: menuItem.children[0].children[0].dataset.hoverColor,
+        });
+        gsap.to(menuItem.children[0].children[1].children, {
+          y: "-100%",
+          color: menuItem.children[0].children[0].dataset.hoverColor,
+        });
+      });
+    }
+
+    if (isTouchDevice()) {
+      menuItem.addEventListener("touchend", function () {
+        gsap.to(menuItem.children[0].children[0].children, {
+          y: "0",
+          color: menuItem.children[0].children[0].dataset.defaultColor,
+        });
+        gsap.to(menuItem.children[0].children[1].children, {
+          y: "0",
+          color: menuItem.children[0].children[0].dataset.defaultColor,
+        });
+      });
+    } else {
+      menuItem.addEventListener("mouseleave", function () {
+        gsap.to(menuItem.children[0].children[0].children, {
+          y: "0",
+          color: menuItem.children[0].children[0].dataset.defaultColor,
+        });
+        gsap.to(menuItem.children[0].children[1].children, {
+          y: "0",
+          color: menuItem.children[0].children[0].dataset.defaultColor,
+        });
+      });
+    }
+  };
+
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
-      direction: "vertical", // vertical, horizontal
-      gestureDirection: "vertical", // vertical, horizontal, both
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
+    const targetItems = document.querySelectorAll(".js-menu-item");
+
+    targetItems.forEach((targetItem) => {
+      const menuItem = targetItem;
+      createElm(menuItem);
+      animation(menuItem);
     });
   }, []);
   return (
@@ -48,6 +133,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="theme-color" content="#ffffff" />
       </Head>
       <SmoothScrollProvider>
+        <Cursor />
         <Component {...pageProps} />
       </SmoothScrollProvider>
       <Analytics />
