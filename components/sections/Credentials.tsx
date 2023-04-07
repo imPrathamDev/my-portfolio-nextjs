@@ -1,6 +1,63 @@
-import React from "react";
+import { useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import isMobile from "../../helper/isMobileHelper";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Credentials: React.FC = () => {
+  useEffect(() => {
+    if (!isMobile()) {
+      gsap.fromTo(
+        "#item1",
+        {
+          transform:
+            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -100, 0, 1)",
+        },
+        {
+          transform:
+            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 100, 0, 1)",
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: "#item1",
+            scrub: 1,
+          },
+        }
+      );
+      gsap.fromTo(
+        "#item2",
+        {
+          transform:
+            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1)",
+        },
+        {
+          transform:
+            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -10, 0, 1)",
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: "#item2",
+            scrub: 1,
+          },
+        }
+      );
+      gsap.fromTo(
+        "#item3",
+        {
+          transform:
+            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 90, 0, 1)",
+        },
+        {
+          transform:
+            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -90, 0, 1)",
+          ease: "sine.out",
+          scrollTrigger: {
+            trigger: "#item3",
+            scrub: 1,
+          },
+        }
+      );
+    }
+  }, []);
   return (
     <section className="mx-6 xl:mx-20 lg:mx-20 my-24 xl:h-screen lg:h-screen flex flex-col xl:flex-row lg:flex-row lg:items-center mix-blend-difference">
       <div className="flex flex-col xl:flex-row lg:flex-row gap-4 w-full">
@@ -15,7 +72,10 @@ const Credentials: React.FC = () => {
             Journey
           </h2>
           <div className="flex flex-col xl:flex-row lg:flex-row xl:items-start lg:items-start lg:gap-x-6">
-            <div className="pt-6 pb-3 border-t-2 border-primary-dark-white">
+            <div
+              id="item1"
+              className="pt-6 pb-3 border-t-2 border-primary-dark-white"
+            >
               <h3 className="text-xl font-semibold my-2">Learning</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">
@@ -32,7 +92,10 @@ const Credentials: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="pt-6 pb-3 border-t-2 border-primary-dark-white">
+            <div
+              id="item2"
+              className="pt-6 pb-3 border-t-2 border-primary-dark-white"
+            >
               <h3 className="text-xl font-semibold my-2">Pedagogue</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">
@@ -48,7 +111,10 @@ const Credentials: React.FC = () => {
                 </p>
               </div>
             </div>
-            <div className="pt-6 pb-3 border-t-2 border-primary-dark-white">
+            <div
+              id="item3"
+              className="pt-6 pb-3 border-t-2 border-primary-dark-white"
+            >
               <h3 className="text-xl font-semibold my-2">Client Work</h3>
               <div className="text-sm max-w-[280px]">
                 <p className="my-2">
