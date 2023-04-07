@@ -1,8 +1,7 @@
 import Image from "next/image";
-import React from "react";
 import { ProjectTypes } from "../../types/types";
-import ImageUrlBuilder from "@sanity/image-url";
-import client from "../../sanityClient";
+import urlFor from "../../helper/urlForHelper";
+import Link from "next/link";
 
 interface ProjectCardListProps {
   num: number;
@@ -10,38 +9,29 @@ interface ProjectCardListProps {
 }
 
 const ProjectListCard: React.FC<ProjectCardListProps> = ({ num, project }) => {
-  const builder = ImageUrlBuilder(client);
-
-  const urlFor = (source: object) => {
-    return builder.image(source);
-  };
   return (
-    <a href={project.githubURL} target="blank">
+    <Link href={`/projects/${project.slug.current}`}>
       <div
-        className={`group p-6 my-4 flex flex-col lg:flex-row xl:ml-[${
-          num * 6
-        }rem] lg:ml-[${num * 6}rem]`}
+        className={`group p-4 my-4 flex flex-col border border-transparent transition-all bg-primary-black/20 hover:bg-primary-dark-white/10 hover:border-primary-dark-white/10 backdrop-blur-md rounded-md w-full lg:w-[35vw] project_item linkHover cursor-pointer`}
       >
-        <div className="lg:w-2/5">
-          <div className="relative overflow-hidden">
-            <Image
-              src={urlFor(project.image).url()}
-              blurDataURL={urlFor(project.image).url()}
-              width={"1280px"}
-              height={"720px"}
-              placeholder="blur"
-              className="object-contain object-center lg:opacity-60 lg:group-hover:opacity-100 lg:transition-all"
-            />
-          </div>
+        <div className="w-full">
+          <Image
+            src={urlFor(project.image).url()}
+            blurDataURL={urlFor(project.image).url()}
+            width={"1280px"}
+            height={"720px"}
+            placeholder="blur"
+            className="object-contain object-center rounded-md opacity-80"
+          />
         </div>
-        <div className="lg:w-3/5 flex flex-col justify-start z-10 py-6 lg:py-10 mix-blend-difference">
-          <h3 className="text-5xl font-dream-avenue max-w-lg lg:-ml-10">
+        <div className="flex flex-col justify-start z-10 py-6 lg:py-2 mix-blend-difference">
+          <h3 className="text-3xl lg:text-5xl font-dream-avenue">
             {project.title}
           </h3>
-          <p className="mx-4 max-w-xl font-sans-light">{project.shortDesc}</p>
+          <p className="font-sans-light cutoff-text">{project.shortDesc}</p>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
