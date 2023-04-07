@@ -1,82 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
 import Layout from "../../components/layout/Layout";
-import { PostTypes } from "../../types/types";
-import Image from "next/image";
-import ImageUrlBuilder from "@sanity/image-url";
-import moment from "moment";
-import Link from "next/link";
+import { CategoryType, PostTypes } from "../../types/types";
 import Head from "next/head";
 import client from "../../sanityClient";
+import BlogCard from "../../components/cards/BlogCard";
+import { useRouter } from "next/router";
+import PageTitle from "../../components/PageTitle";
 
 interface Props {
   posts: PostTypes[];
+  categories: CategoryType[];
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const posts = await client.fetch(
     `*[_type == "post"]{..., author->, categories[]->} | order(_createdAt desc)`
   );
+
+  const categories = await client.fetch(`*[_type == "category"]`);
   return {
     props: {
       posts,
+      categories,
     },
     revalidate: 10,
   };
 };
 
-const BlogIndex = ({ posts }: Props) => {
-  // console.log(posts);
-  const builder = ImageUrlBuilder(client);
-  const urlFor = (source: object) => {
-    return builder.image(source);
-  };
+const BlogIndex = ({ posts, categories }: Props) => {
+  const [allPosts, setAllPosts] = useState(posts);
+  const [category, setCategory] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (category.length > 0) {
+      setAllPosts(
+        posts.filter((f) =>
+          f.categories.find(
+            (p) => p.title.toLowerCase() === category.toLowerCase()
+          )
+        )
+      );
+    }
+  }, [category]);
+
+  useEffect(() => {
+    if (router.query.category) {
+      setCategory(router.query.category as string);
+    }
+  }, [router]);
   return (
     <Layout>
       <main className="px-4 py-8 lg:px-24 lg:pt-32 lg:pb-8">
-        <Head>
-          <title>Blog | Pratham Sharma</title>
-          <meta name="title" content="Blog | Pratham Sharma" />
-          <meta
-            name="description"
-            content="Let me share some practices and techniques which I learn in my
+        <PageTitle
+          title="Blog | Pratham Sharma"
+          description="Let me share some practices and techniques which I learn in my
           programming journey. Mainly related to Web Development & App
           Development."
-          />
-          <meta
-            name="keywords"
-            content="Pratham Sharma, Portfolio, Pratham, imPrathamDev, Blog, Blogs, Pratham Sharma Blog, ReactJS, NextJS"
-          />
-          <meta name="author" content="Pratham Sharma" />
-
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOST} />
-          <meta property="twitter:title" content="Blog | Pratham Sharma" />
-          <meta
-            property="twitter:description"
-            content="Let me share some practices and techniques which I learn in my
-          programming journey. Mainly related to Web Development & App
-          Development."
-          />
-          <meta
-            property="twitter:image"
-            content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/All-Blogs-&-Tutorials-Page.png`}
-          />
-
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={process.env.NEXT_PUBLIC_HOST} />
-          <meta property="og:title" content="Blog | Pratham Sharma" />
-          <meta
-            property="og:description"
-            content="Let me share some practices and techniques which I learn in my
-          programming journey. Mainly related to Web Development & App
-          Development."
-          />
-          <meta
-            property="og:image"
-            content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/All-Blogs-&-Tutorials-Page.png`}
-          />
-        </Head>
+          keywords="Pratham Sharma, Portfolio, Pratham, imPrathamDev, Blog, Blogs, Pratham Sharma Blog, ReactJS, NextJS"
+          image="/ogImages/All-Blogs-&-Tutorials-Page.png"
+        />
         <section className="flex flex-col justify-start">
           <h1 className="text-6xl font-dream-avenue my-2">
             My Articles<span className=" text-primary">.</span>
@@ -86,48 +70,30 @@ const BlogIndex = ({ posts }: Props) => {
             programming journey. Mainly related to Web Development & App
             Development.
           </p>
+          <div className="my-2 flex items-center gap-x-2">
+            {categories.map((cat) => (
+              <button
+                key={cat._id}
+                onClick={() => {
+                  setCategory(cat.title);
+                }}
+                className={`px-2 py-1 bg-transparent rounded-full border uppercase cursor-pointer ${
+                  category.toLowerCase() === cat.title.toLowerCase()
+                    ? "border-primary text-primary hover:border-primary-dark-white hover:text-primary-dark-white"
+                    : "border-primary-dark-white text-primary-dark-white hover:border-primary hover:text-primary"
+                } transition-all linkHover`}
+              >
+                {cat.title}
+              </button>
+            ))}
+          </div>
         </section>
 
         <section className="py-8 lg:px-6 px-2">
           <div className="">
             <div className="[column-fill:_balance] grid grid-cols-1 lg:grid-cols-2 sm:gap-6 lg:gap-8">
-              {posts.map((post, key) => (
-                <Link key={key} href={`/blog/${post.slug.current}`}>
-                  <a className="mt-2 mb-8 mx-0 lg:mx-4 max-w-xl group">
-                    <span className="sr-only">{post.title}</span>
-                    <div>
-                      <div className="relative overflow-hidden">
-                        <Image
-                          src={urlFor(post.mainImage).url()}
-                          width={640}
-                          height={400}
-                          className="object-contain object-center"
-                        />
-                        <div className="absolute top-2 left-2 flex items-center justify-start gap-x-1">
-                          {post.categories.map((category, key) => (
-                            <span
-                              key={key}
-                              className="px-2 py-1 bg-primary-black text-primary-white text-base"
-                            >
-                              {category.title}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="font-dream-avenue mt-3">
-                        <h2 className="text-3xl lg:text-4xl group-hover:underline group-hover:text-primary transition-all">
-                          {post.title}
-                        </h2>
-                        <p className="text-sm font-sans text-primary-dark-white my-1">
-                          {post.shortDesc}
-                        </p>
-                        <span>
-                          {moment(post.publishedAt).format("MMM Do YY")}
-                        </span>
-                      </div>
-                    </div>
-                  </a>
-                </Link>
+              {allPosts.map((post, key) => (
+                <BlogCard post={post} key={key} />
               ))}
             </div>
           </div>
