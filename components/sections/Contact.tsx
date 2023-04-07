@@ -1,80 +1,134 @@
-import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import classNames from "classnames";
-import bgImage from "../../public/images/about-section.jpg";
-import useOnScreen from "../../hooks/useOnScreen";
+import gsap, { Power2 } from "gsap";
+import { useEffect, useState } from "react";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import LinkButton from "../LinkButton";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Contact: React.FC = () => {
-  const [reveal, setReveal] = useState(false);
-  const ref = useRef(null);
-  const isOnScreen = useOnScreen(ref);
+  const [status, setStatus] = useState(false);
   useEffect(() => {
-    if (isOnScreen) setReveal(true);
-  }, [isOnScreen]);
+    setStatus((prev) => !prev);
+    const contactHeading = document.getElementById("contactHeading");
+    const contactPara = document.getElementById("contactPara");
+    gsap.fromTo(
+      contactHeading,
+      {
+        y: 112,
+      },
+      {
+        duration: 1,
+        y: 0,
+        ease: Power2.easeOut,
+        scrollTrigger: {
+          trigger: contactHeading,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      contactPara,
+      {
+        y: 112,
+      },
+      {
+        duration: 1,
+        y: 0,
+        delay: 0.2,
+        ease: Power2.easeOut,
+        scrollTrigger: {
+          trigger: contactPara,
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".link-button-container",
+      {
+        opacity: 0,
+        y: 50,
+      },
+      {
+        duration: 1,
+        opacity: 1,
+        y: 0,
+        ease: Power2.easeOut,
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".link-button-container",
+        },
+      }
+    );
+  }, []);
+
+  useEffect(() => {
+    const text = document.querySelector(".text p") as HTMLParagraphElement;
+    if (text && text.innerHTML) {
+      text.innerHTML = text.innerText
+        .split("")
+        .map(
+          (char, index) =>
+            `<span style="transform: rotate(${index * 5.6}deg)">${char}</span>`
+        )
+        .join("");
+    }
+  }, [status]);
   return (
-    <section className="mx-6 xl:mx-20 lg:mx-20 xl:h-screen lg:h-screen mix-blend-difference">
-      <div className="flex flex-col xl:flex-row lg:flex-row xl:items-center lg:items-center">
-        <div className="xl:w-1/2 lg:w-1/2">
-          <h2 className="text-6xl font-dream-avenue my-3">
-            Contact <br /> <span className="text-primary">Me</span>.
-          </h2>
-
-          <div className="mx-2 lg:mx-6 mt-14 w-fit">
-            <a
-              href="https://github.com/imPrathamDev"
-              className="flex flex-col w-full group cursor-pointer my-6 px-4 py-2 rounded-md hover:bg-[#262626] transition-all duration-300"
+    <section className="pt-8 pb-2 mx-6 xl:mx-20 lg:mx-20 mix-blend-difference">
+      <div className="flex flex-col lg:flex-row w-full">
+        <div className="w-full lg:w-1/2">
+          <div className="relative h-fit w-full overflow-hidden">
+            <h2
+              id="contactHeading"
+              className="text-5xl lg:text-8xl font-dream-avenue font-medium"
             >
-              <h3 className="text-3xl font-dream-avenue">Github</h3>
-              <p className="text-primary-dark-white font-semibold text-sm group-hover:text-primary group-hover:underline transition-all">
-                github.com/imPrathamDev
+              <span className="text-2xl lg:text-6xl">@</span>imPrathamDev
+            </h2>
+          </div>
+          <div className="ml-6 lg:ml-20">
+            <div className="relative h-fit w-full overflow-hidden my-2">
+              <p id="contactPara" className="text-sm font-sans-light">
+                I take inspirations from many other web design.
+                <br />
+                If you like feel free to copy.
               </p>
-            </a>
-
-            <a
-              href="https://www.instagram.com/impratham.dev/"
-              className="flex flex-col w-full group cursor-pointer my-6 px-4 py-2 rounded-md hover:bg-[#262626] transition-all duration-300"
-            >
-              <h3 className="text-3xl font-dream-avenue">Instagram</h3>
-              <p className="text-primary-dark-white font-semibold text-sm group-hover:text-primary group-hover:underline transition-all">
-                instagram.com/imPratham.Dev
-              </p>
-            </a>
-
-            <a
-              href="https://twitter.com/imPrathamDev"
-              className="flex flex-col w-full group cursor-pointer my-6 px-4 py-2 rounded-md hover:bg-[#262626] transition-all duration-300"
-            >
-              <h3 className="text-3xl font-dream-avenue">Twitter</h3>
-              <p className="text-primary-dark-white font-semibold text-sm group-hover:text-primary group-hover:underline transition-all">
-                twitter.com/imPrathamDev
-              </p>
-            </a>
-
-            <a
-              href="mailto:hi@impratham.dev"
-              className="flex flex-col w-full group cursor-pointer my-6 px-4 py-2 rounded-md hover:bg-[#262626] transition-all duration-300"
-            >
-              <h3 className="text-3xl font-dream-avenue">Email</h3>
-              <p className="text-primary-dark-white font-semibold text-sm group-hover:text-primary group-hover:underline transition-all">
-                hi@impratham.dev
-              </p>
-            </a>
+            </div>
+            <div className="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:gap-x-2 my-4">
+              <span className="w-fit px-4 py-1 rounded-full border-2 border-primary-white cursor-pointer link-button-container">
+                <LinkButton
+                  link="mailto:prathamsharma.dev@yahoo.com"
+                  text="prathamsharma.dev@yahoo.com"
+                  textSize="text-sm"
+                  fontClass="font-sans"
+                  colorClass="text-primary-white"
+                  color="#eeeee6"
+                  hoverColor="#eeeee6"
+                />
+              </span>
+              <span className="w-fit px-4 py-1 rounded-full border-2 border-primary-white cursor-pointer link-button-container">
+                <LinkButton
+                  text="+918107453954"
+                  link="tel:8107453954"
+                  textSize="text-sm"
+                  fontClass="font-sans"
+                  colorClass="text-primary-white"
+                  color="#eeeee6"
+                  hoverColor="#eeeee6"
+                />
+              </span>
+            </div>
           </div>
         </div>
-
-        <div className="xl:w-1/2 lg:w-1/2 py-6">
-          <div
-            ref={ref}
-            className={classNames(
-              "invisible relative overflow-hidden xl:w-full  lg:w-full h-96 xl:h-screen lg:h-screen border-2 border-primary-dark-white border-opacity-60",
-              { "reveal-delay": reveal }
-            )}
-          >
-            <Image
-              src={bgImage}
-              layout="fill"
-              className="object-cover object-center opacity-60"
-            />
+        <div className="w-full mt-12 lg:mt-0 lg:w-1/2 flex justify-center lg:items-center lg:justify-end">
+          <div className="relative w-60 h-60 rounded-full flex items-center justify-center">
+            <div className="absolute w-10 h-10 flex items-center justify-center left-[42%] top-[42%]">
+              <h3 className="text-5xl font-dream-avenue text-primary linkHover z-10">
+                PS
+              </h3>
+            </div>
+            <div className="animate-rotate-anim absolute w-full h-full text">
+              <p className="">UI & UX Design - Frontend - Backend & App</p>
+            </div>
           </div>
         </div>
       </div>
