@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-cursor: 240, 165, 0;
+    --cursor-outline-shade: 0.3;
+    --cursor-size: 10px;
+    --cursor-outline-size: 12px;
+  }
+
   @font-face {
     font-family: "Dream Avenue";
     src: url("/fonts/Dream-Avenue.ttf");
@@ -49,6 +56,63 @@
     border-radius: 360px;
     max-height: 6px;
     background-color: #aba9a8;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  #cursor:not([data-type=""]) > #cursor-icon {
+    opacity: 1;
+  }
+
+  #cursor-dot,
+  #cursor-dot-outline {
+    position: fixed;
+    z-index: 99999999;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+  }
+
+  #cursor-dot {
+    width: var(--cursor-size);
+    height: var(--cursor-size);
+    background-color: rgba(var(--color-cursor), 1);
+  }
+
+  #cursor-dot-outline {
+    width: var(--cursor-outline-size);
+    height: var(--cursor-outline-size);
+    background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
+  }
+
+  .text span {
+    position: absolute;
+    left: 50%;
+    transform-origin: 0 120px;
+  }
+
+  .linkItem > span {
+    display: inline-block;
+    white-space: pre;
+  }
+
+  .cutoff-text {
+    --max-line: 3;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--max-line);
   }
 }
 
