@@ -5,6 +5,7 @@ import ProjectListCard from "../../components/cards/ProjectListCard";
 import Layout from "../../components/layout/Layout";
 import { ProjectTypes } from "../../types/types";
 import client from "../../sanityClient";
+import PageTitle from "../../components/PageTitle";
 
 interface ProjectPageProps {
   projects: ProjectTypes[];
@@ -26,49 +27,14 @@ const Page: NextPage<ProjectPageProps> = ({ projects }) => {
   return (
     <Layout>
       <main className="px-4 py-8 lg:px-24 lg:pt-32 lg:pb-8">
-        <Head>
-          <title>Projects | Pratham Sharma</title>
-          <meta name="title" content="Projects | Pratham Sharma" />
-          <meta
-            name="description"
-            content="Let's check my open source projects. All projects github repo link
+        <PageTitle
+          title="Projects | Pratham Sharma"
+          description="Let's check my open source projects. All projects github repo link
           is available if possible you will able to find demo link also on
           github repo README.md file."
-          />
-          <meta
-            name="keywords"
-            content="Pratham Sharma, Portfolio, Pratham, imPrathamDev, Projects"
-          />
-          <meta name="author" content="Pratham Sharma" />
-
-          <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content={process.env.NEXT_PUBLIC_HOST} />
-          <meta property="twitter:title" content="Projects | Pratham Sharma" />
-          <meta
-            property="twitter:description"
-            content="Let's check my open source projects. All projects github repo link
-          is available if possible you will able to find demo link also on
-          github repo README.md file."
-          />
-          <meta
-            property="twitter:image"
-            content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/All-Projects-With-Github-Links.png`}
-          />
-
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={process.env.NEXT_PUBLIC_HOST} />
-          <meta property="og:title" content="Projects | Pratham Sharma" />
-          <meta
-            property="og:description"
-            content="Let's check my open source projects. All projects github repo link
-          is available if possible you will able to find demo link also on
-          github repo README.md file."
-          />
-          <meta
-            property="og:image"
-            content={`${process.env.NEXT_PUBLIC_HOST}/ogImages/All-Projects-With-Github-Links.png`}
-          />
-        </Head>
+          keywords="Pratham Sharma, Portfolio, Pratham, imPrathamDev, Projects"
+          image="/ogImages/All-Projects-With-Github-Links.png"
+        />
         <section className="flex flex-col justify-start">
           <h1 className="text-6xl font-dream-avenue my-2">
             My Projects<span className="text-primary">.</span>
@@ -80,7 +46,7 @@ const Page: NextPage<ProjectPageProps> = ({ projects }) => {
           </p>
         </section>
 
-        <section className="lg:py-8 py-6 lg:px-6">
+        <section className="lg:py-8 py-6 lg:px-6 grid grid-cols-1 gap-y-4 lg:grid-cols-2 lg:gap-y-0">
           {projects.map((project, key) => (
             <React.Fragment key={key}>
               <ProjectListCard num={key} project={project} />
