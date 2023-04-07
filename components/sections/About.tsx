@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import bgImage from "../../public/images/about.jpg";
 import useOnScreen from "../../hooks/useOnScreen";
 import cn from "classnames";
-import gsap, { Power1, Power2 } from "gsap";
+import gsap, { Power1 } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,7 +20,7 @@ const About: React.FC = () => {
     if (onScreen) setReveal(true);
     if (window && document && !once) {
       const paras = document.querySelectorAll(".splitting");
-      const Splitting = require("Splitting");
+      const Splitting = require("splitting");
       Splitting({ by: "chars", target: paras });
       gsap.set(".char", {
         opacity: 0,
