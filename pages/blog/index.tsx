@@ -70,7 +70,7 @@ const BlogIndex = ({ posts, categories }: Props) => {
             programming journey. Mainly related to Web Development & App
             Development.
           </p>
-          <div className="my-2 flex items-center gap-x-2">
+          <div className="my-2 flex items-center gap-x-2 overflow-x-auto">
             {categories.map((cat) => (
               <button
                 key={cat._id}
