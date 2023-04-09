@@ -131,7 +131,7 @@ const TextToSpeech = ({ text }: { text: string }) => {
             typeof window !== "undefined" && window.speechSynthesis.resume();
           }
         }}
-        className="px-2 py-1 flex items-center gap-x-1 border border-primary-dark-white text-primary-dark-white rounded-full hover:border-primary hover:text-primary transition-all"
+        className="px-2 py-1 flex items-center gap-x-1 border border-primary-dark-white text-primary-dark-white rounded-full hover:border-primary hover:text-primary transition-all linkHover"
       >
         {status === "stop" || status === "pause" ? (
           <svg
