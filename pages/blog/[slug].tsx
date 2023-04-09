@@ -136,7 +136,7 @@ const SlugIndex = ({ post }: PostType) => {
 
   return (
     <Layout>
-      <main className="px-4 py-6 lg:px-24 lg:pt-32 lg:pb-8 relative overflow-hidden lg:overflow-visible">
+      <main className="px-4 py-6 lg:px-24 lg:pt-32 lg:pb-8 relative overflow-y-clip lg:overflow-visible">
         <Toast toast={toast} setToast={setToast} />
         <PageTitle
           title={`${post.title} | Pratham Sharma`}
