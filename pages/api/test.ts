@@ -11,7 +11,7 @@ export default function handler(
   console.log("Response phonepe pratham =>", {
     query: req.query,
     body: req.body,
-    DecodedBody: atob(req.body),
+    DecodedBody: atob(req.body.request),
   });
   return res.send(`OK`);
 }
