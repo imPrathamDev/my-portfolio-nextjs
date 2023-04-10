@@ -8,5 +8,9 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<string>
 ) {
-  return res.send(`${req.protocol}}`);
+  console.log("Response phonepe pratham =>", {
+    query: req.query,
+    body: req.body,
+  });
+  return res.send(`OK`);
 }
