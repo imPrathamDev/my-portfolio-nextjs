@@ -8,5 +8,5 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<string>
 ) {
-  return res.send(`${req.protocol}://${req.get("host")}`);
+  return res.send(`${req.protocol}}`);
 }
