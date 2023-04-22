@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       project: project[0],
       contentMD: data.data,
     },
+    revalidate: 10,
   };
 };
 
