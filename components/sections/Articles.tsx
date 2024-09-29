@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { PostTypes } from "../../types/types";
 import Link from "next/link";
@@ -9,37 +9,47 @@ import readingTime from "../../helper/readingTimeHelper";
 import urlFor from "../../helper/urlForHelper";
 import gsap, { Power2 } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
+
 interface ArticleProps {
   posts: PostTypes[];
 }
 
 const Articles: React.FC<ArticleProps> = ({ posts }) => {
-  useEffect(() => {
-    let targets = gsap.utils.toArray(".downToUp");
-    gsap.fromTo(
-      targets.reverse(),
-      {
-        y: 500,
-      },
-      {
-        duration: 1,
-        y: 0,
-        ease: Power2.easeOut,
-        stagger: {
-          amount: 0.4,
+  const sectionRef = useRef(null);
+  useGSAP(
+    () => {
+      let targets = gsap.utils.toArray(".downToUp");
+      gsap.fromTo(
+        targets.reverse(),
+        {
+          y: 500,
         },
-        scrollTrigger: {
-          trigger: "#articleSection",
-          start: "start 90%",
-        },
-      }
-    );
-  }, []);
+        {
+          duration: 1,
+          y: 0,
+          ease: Power2.easeOut,
+          stagger: {
+            amount: 0.4,
+          },
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "start 90%",
+          },
+        }
+      );
+    },
+    {
+      scope: sectionRef,
+    }
+  );
+
   return (
     <section
-      id="articleSection"
+      ref={sectionRef}
       className="mx-6 my-24 lg:my-0 mt-8 xl:mx-20 xl:mt-40 lg:mx-20 lg:mt-40 xl:mb-24  lg:mb-24 mix-blend-difference"
     >
       <div className="flex flex-col xl:flex-row lg:flex-row">
