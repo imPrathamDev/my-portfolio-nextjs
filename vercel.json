@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://your-new-portfolio.com/$1",
+      "permanent": true
+    }
+  ]
+}
