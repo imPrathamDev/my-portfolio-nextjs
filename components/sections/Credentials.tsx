@@ -1,65 +1,77 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import isMobile from "../../helper/isMobileHelper";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const Credentials: React.FC = () => {
-  useEffect(() => {
-    if (!isMobile()) {
-      gsap.fromTo(
-        "#item1",
-        {
-          transform:
-            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -100, 0, 1)",
-        },
-        {
-          transform:
-            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 100, 0, 1)",
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: "#item1",
-            scrub: 1,
+  const sectionRef = useRef(null);
+  useGSAP(
+    () => {
+      const isM = isMobile();
+      if (!isM) {
+        gsap.fromTo(
+          "#item1",
+          {
+            transform:
+              "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -100, 0, 1)",
           },
-        }
-      );
-      gsap.fromTo(
-        "#item2",
-        {
-          transform:
-            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1)",
-        },
-        {
-          transform:
-            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -10, 0, 1)",
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: "#item2",
-            scrub: 1,
+          {
+            transform:
+              "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 100, 0, 1)",
+            ease: "sine.out",
+            scrollTrigger: {
+              trigger: "#item1",
+              scrub: 1,
+            },
+          }
+        );
+        gsap.fromTo(
+          "#item2",
+          {
+            transform:
+              "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 10, 0, 1)",
           },
-        }
-      );
-      gsap.fromTo(
-        "#item3",
-        {
-          transform:
-            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 90, 0, 1)",
-        },
-        {
-          transform:
-            "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -90, 0, 1)",
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: "#item3",
-            scrub: 1,
+          {
+            transform:
+              "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -10, 0, 1)",
+            ease: "sine.out",
+            scrollTrigger: {
+              trigger: "#item2",
+              scrub: 1,
+            },
+          }
+        );
+        gsap.fromTo(
+          "#item3",
+          {
+            transform:
+              "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 90, 0, 1)",
           },
-        }
-      );
+          {
+            transform:
+              "matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -90, 0, 1)",
+            ease: "sine.out",
+            scrollTrigger: {
+              trigger: "#item3",
+              scrub: 1,
+            },
+          }
+        );
+      }
+    },
+    {
+      scope: sectionRef,
     }
-  }, []);
+  );
   return (
-    <section className="mx-6 xl:mx-20 lg:mx-20 my-24 xl:h-screen lg:h-screen flex flex-col xl:flex-row lg:flex-row lg:items-center mix-blend-difference">
+    <section
+      ref={sectionRef}
+      className="mx-6 xl:mx-20 lg:mx-20 my-24 xl:h-screen lg:h-screen flex flex-col xl:flex-row lg:flex-row lg:items-center mix-blend-difference"
+    >
       <div className="flex flex-col xl:flex-row lg:flex-row gap-4 w-full">
         <h2 className="text-7xl font-dream-avenue my-3 flex-1">
           Developing <br />

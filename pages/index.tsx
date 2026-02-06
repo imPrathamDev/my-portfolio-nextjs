@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
     `*[_type == "post"]{..., categories[]->}[0..1] | order(_createdAt desc)`
   );
   const projects = await client.fetch(
-    `*[_type == "project"][0..2] | order(_createdAt desc)`
+    `*[_type == "project"][0..4] | order(_createdAt desc)`
   );
   return {
     props: {

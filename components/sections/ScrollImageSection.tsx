@@ -3,42 +3,50 @@ import { useRef, useEffect } from "react";
 import gsap, { Power2 } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import bgImage from "../../public/images/scroll-image.jpg";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const ScrollImageSection = () => {
   const textRef = useRef(null);
   const imageRef = useRef(null);
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (textRef.current && imageRef.current && sectionRef.current) {
-      gsap.fromTo(
-        textRef.current,
-        {
-          y: 100,
-          fontSize: "4.5rem",
-        },
-        {
-          y: 0,
-          ease: "sine.out",
-          scrollTrigger: {
-            trigger: textRef.current,
-            // start: "top 90%",
-            scrub: 2,
+  useGSAP(
+    () => {
+      if (textRef.current && imageRef.current && sectionRef.current) {
+        gsap.fromTo(
+          textRef.current,
+          {
+            y: 100,
+            fontSize: "4.5rem",
           },
-        }
-      );
-      gsap.to(imageRef.current, {
-        width: "100vw",
-        height: "90vh",
-        scrollTrigger: {
-          trigger: imageRef.current,
-          scrub: true,
-        },
-      });
+          {
+            y: 0,
+            ease: "sine.out",
+            scrollTrigger: {
+              trigger: textRef.current,
+              // start: "top 90%",
+              scrub: 2,
+            },
+          }
+        );
+        gsap.to(imageRef.current, {
+          width: "100vw",
+          height: "90vh",
+          scrollTrigger: {
+            trigger: imageRef.current,
+            scrub: true,
+          },
+        });
+      }
+    },
+    {
+      scope: sectionRef,
     }
-  }, []);
+  );
+
   return (
     <section
       ref={sectionRef}
